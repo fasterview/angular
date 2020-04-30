@@ -1,1 +1,30 @@
-<p>header works!</p>
+<nav class="navbar">
+    <div class="container">
+      <div class="col-12 d-flex justify-between align-center">
+            <a class="logo" href="/">
+                <img src="/assets/images/logo.png" alt=""/>
+            </a>
+            <ul class="navbar-list" *ngIf="!isLogged">
+                <li>
+                    <a class="navbar-link" href="#">Login</a>
+                </li>
+                <li>
+                    <a class="navbar-link-btn" href="#">Register</a>
+                </li>
+            </ul>
+            
+        <ul class="navbar-list" *ngIf="isLogged"><!--li.item-btn.dropdown-wrapper.show-dropdown -->
+          <li class="item-btn dropdown-wrapper">
+              <img src="/images/user.png"/>
+              <span class="name">John Doe</span>
+              <i class="fas fa-sort-down"></i>
+            <ul class="list-item-dropdown dropdown-menu">
+              <li><a class="active" href="#">Companies</a></li>
+              <li><a href="/profile">Profile</a></li>
+              <li><a href="#">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
