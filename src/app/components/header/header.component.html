@@ -6,7 +6,9 @@
             </a>
             <ul class="navbar-list" *ngIf="!isLogged">
                 <li>
-                    <a class="navbar-link" href="#">Login</a>
+                    <a  class="navbar-link" 
+                        routerLink="/login"
+                        routerLinkActive="active">Login</a>
                 </li>
                 <li>
                     <a class="navbar-link-btn" href="#">Register</a>
