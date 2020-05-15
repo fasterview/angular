@@ -26,12 +26,13 @@ export class LoginComponent implements OnInit {
    * Log the user in using email and password
    */
   login(){
-    let {email, password} = {...this.loginForm.value};
+    let username = this.loginForm.value.email;
+    let password = this.loginForm.value.password;
 
     this.isLoading = true;
 
     this._http.post(environment.url("oauth/token"), {
-      username: email,
+      username,
       password,
       grant_type: "password",
       "client_id": environment.client_id,
