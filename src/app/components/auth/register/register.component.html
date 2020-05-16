@@ -1,0 +1,83 @@
+<div class="container auth-form-container">
+    <div class="row">
+      <div class="col-lg-5 col-md-7 col-sm-9 col-12 mx-auto">
+        <form class="auth-form" [formGroup]="registerForm" (ngSubmit)="register()">
+          <div class="form-group">
+            <label>Username</label>
+            <input 
+                    [ngClass]="{invalid: registerForm.get('name').invalid && registerForm.get('name').touched}" 
+                    formControlName="name"
+                    type="text" 
+                    />
+            <span *ngIf="registerForm.get('name').invalid && registerForm.get('name').touched">
+                <small class="error-msg" *ngIf="registerForm.get('name').errors?.required">
+                    This field is required
+                </small>
+                <small class="error-msg" *ngIf="registerForm.get('name').errors?.minlength">
+                    Minimum length is 3 characters long
+                </small>
+                <small class="error-msg" *ngIf="registerForm.get('name').errors?.maxlength">
+                    Maximum length is 15 characters long
+                </small>
+            </span>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input 
+                [ngClass]="{invalid: (registerForm.get('email').invalid && registerForm.get('email').touched)
+                                    || usedEmail}" 
+                formControlName="email"
+                type="email"/>
+                <span *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched">
+                    <small class="error-msg" *ngIf="registerForm.get('email').errors?.required">
+                        This Field is required
+                    </small>
+                    <small class="error-msg" *ngIf="registerForm.get('email').errors?.email">
+                        Please enter a valid email
+                    </small>
+                </span>
+                <small class="error-msg" *ngIf="usedEmail === registerForm.value.email">
+                    This email is used
+                </small>
+          </div>
+          <div class="form-group">
+            <label>Passwrod</label>
+            <input 
+                [ngClass]="{invalid: registerForm.get('password').invalid && registerForm.get('password').touched}" 
+                formControlName="password"
+                type="password"/>
+                <span *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched">
+                    <small class="error-msg" *ngIf="registerForm.get('password').errors?.required">
+                        This Field is required
+                    </small>
+                    <small class="error-msg" *ngIf="registerForm.get('password').errors?.minlength">
+                        Minimum length is 6 characters long
+                    </small>
+                </span>
+          </div>
+          <div class="form-group">
+            <label>Confirm Password</label>
+            <input 
+                [ngClass]="{invalid:    registerForm.get('password_confirmation').invalid 
+                                        && registerForm.get('password_confirmation').touched}" 
+                formControlName="password_confirmation"
+                type="password"/>
+                <span *ngIf="registerForm.get('password_confirmation').invalid && registerForm.get('password_confirmation').touched">
+                    <small class="error-msg" *ngIf="registerForm.get('password_confirmation').errors?.required">
+                        This Field is required
+                    </small>
+                </span>
+          </div>
+          <div class="form-group mt-30 d-sm-flex justify-between align-center">
+            <button [ngClass]="{loading: isLoading}" 
+                    type="submit"
+                    [disabled]="registerForm.invalid || isLoading">
+                <span class="btn-text">Register</span>
+                <div class="ring"></div>
+            </button>
+            <span class="msg">Have an account? <a class="a-blue" routerLink="/login" routerLinkActive="router-link-active" >Login</a></span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
