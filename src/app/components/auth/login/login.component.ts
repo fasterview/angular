@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   isLoading: boolean = false;
   loginForm: FormGroup;
+  wrongInfo: boolean = false;
 
   constructor(private _http: HttpClient) { }
 
@@ -42,7 +43,7 @@ export class LoginComponent implements OnInit {
         console.log(res);
       },
       (err)=>{
-        console.log(err);
+        this.wrongInfo = err.error?.error ? this.loginForm.value.email : "";
       },
       ()=>{ this.isLoading = false }
     )

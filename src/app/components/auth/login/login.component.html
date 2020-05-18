@@ -4,42 +4,69 @@
       <form class="auth-form" [formGroup]="loginForm" (ngSubmit)="login()">
         <div class="form-group">
           <label>Email</label>
-          <input 
-                [ngClass]="{invalid: loginForm.get('email').invalid && loginForm.get('email').touched}"
-                formControlName="email" 
-                type="email"/>
-            <span *ngIf="loginForm.get('email').touched">
-                <small class="error-msg" *ngIf="loginForm.get('email').errors?.required">
-                    This field is required
-                </small>
-                <small class="error-msg" *ngIf="loginForm.get('email').errors?.email">
-                    Enter a valid email
-                </small>
-            </span>
+          <input
+            [ngClass]="{
+              invalid:
+                loginForm.get('email').invalid && loginForm.get('email').touched
+            }"
+            formControlName="email"
+            type="email"
+            #email
+          />
+          <span *ngIf="loginForm.get('email').touched">
+            <small
+              class="error-msg"
+              *ngIf="loginForm.get('email').errors?.required"
+            >
+              This field is required
+            </small>
+            <small
+              class="error-msg"
+              *ngIf="loginForm.get('email').errors?.email"
+            >
+              Enter a valid email
+            </small>
+          </span>
+          <small
+              class="error-msg"
+              *ngIf="wrongInfo === email.value"
+              >
+              Wrong email or password
+            </small>
         </div>
         <div class="form-group">
           <label>Passwrod</label>
           <input
-                [ngClass]="{invalid: loginForm.get('password').invalid && loginForm.get('password').touched}"
-                type="password" 
-                formControlName="password" />
-            <span *ngIf="loginForm.get('password').touched">
-                <small class="error-msg" *ngIf="loginForm.get('password').errors?.required">
-                    This field is required
-                </small>
-            </span>
+            [ngClass]="{
+              invalid:
+                loginForm.get('password').invalid &&
+                loginForm.get('password').touched
+            }"
+            type="password"
+            formControlName="password"
+          />
+          <span *ngIf="loginForm.get('password').touched">
+            <small
+              class="error-msg"
+              *ngIf="loginForm.get('password').errors?.required"
+            >
+              This field is required
+            </small>
+          </span>
         </div>
         <div class="form-group mt-30 d-flex justify-between align-center">
-            <button [ngClass]="{loading: isLoading}" 
-                    type="submit"
-                    [disabled]="loginForm.invalid || isLoading">
-                <span class="btn-text">Login</span>
-                <div class="ring"></div>
-            </button>
-            <span class="msg">
-                Don't have an account?
-                <a class="a-blue" routerLink="/register">Register</a>
-            </span>
+          <button
+            [ngClass]="{ loading: isLoading }"
+            type="submit"
+            [disabled]="loginForm.invalid || isLoading"
+          >
+            <span class="btn-text">Login</span>
+            <div class="ring"></div>
+          </button>
+          <span class="msg">
+            Don't have an account?
+            <a class="a-blue" routerLink="/register">Register</a>
+          </span>
         </div>
       </form>
     </div>
