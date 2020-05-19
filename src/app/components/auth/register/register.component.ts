@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { finalize } from "rxjs/operators";
 
 @Component({
   selector: 'app-register',
@@ -44,7 +45,11 @@ export class RegisterComponent implements OnInit {
       email,
       password,
       password_confirmation,
-    }).subscribe(
+    }).pipe(
+      finalize(()=>{
+        this.isLoading = false;
+      })
+    ).subscribe(
       (res)=>{
         console.log(res);
       },
@@ -53,8 +58,7 @@ export class RegisterComponent implements OnInit {
 
         this.usedEmail = !!err.error?.errors?.email ? email : false;
         this.isLoading = false;
-      },
-      ()=>{this.isLoading = false;}
+      }
     )
 
   }

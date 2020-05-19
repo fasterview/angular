@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { finalize } from "rxjs/operators";
 
 @Component({
   selector: 'app-login',
@@ -38,14 +39,17 @@ export class LoginComponent implements OnInit {
       grant_type: "password",
       "client_id": environment.client_id,
       "client_secret": environment.client_secret
-    }).subscribe(
+    }).pipe(
+      finalize(()=>{
+        this.isLoading = false;
+      })
+    ).subscribe(
       (res)=>{
         console.log(res);
       },
       (err)=>{
         this.wrongInfo = err.error?.error ? this.loginForm.value.email : "";
-      },
-      ()=>{ this.isLoading = false }
+      }
     )
     
   }
