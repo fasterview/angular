@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { finalize } from "rxjs/operators";
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   usedEmail: boolean = false;
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient, private _auth: AuthService) { }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -50,8 +51,8 @@ export class RegisterComponent implements OnInit {
         this.isLoading = false;
       })
     ).subscribe(
-      (res)=>{
-        console.log(res);
+      (res: {access_token: string})=>{
+        this._auth.login(res.access_token);
       },
       (err)=>{
         console.log(err);

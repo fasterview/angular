@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { finalize } from "rxjs/operators";
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   wrongInfo: boolean = false;
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient, private _auth: AuthService) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -44,8 +45,8 @@ export class LoginComponent implements OnInit {
         this.isLoading = false;
       })
     ).subscribe(
-      (res)=>{
-        console.log(res);
+      (res: {access_token: string})=>{
+        this._auth.login(res.access_token);
       },
       (err)=>{
         this.wrongInfo = err.error?.error ? this.loginForm.value.email : "";
