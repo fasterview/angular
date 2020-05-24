@@ -30,4 +30,7 @@ import { AuthService } from './services/auth.service';
   providers: [AuthService], 
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  // Intialize the auth server once the app is loaded
+  constructor(private _: AuthService){}
+ }
