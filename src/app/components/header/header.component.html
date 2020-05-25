@@ -4,7 +4,7 @@
             <a class="logo" routerLink="/">
                 <img src="/assets/images/logo.png" alt=""/>
             </a>
-            <ul class="navbar-list" *ngIf="!isLogged">
+            <ul class="navbar-list" *ngIf="!user">
                 <li>
                     <a  class="navbar-link" 
                         routerLink="/login"
@@ -17,10 +17,10 @@
                 </li>
             </ul>
             
-        <ul class="navbar-list" *ngIf="isLogged"><!--li.item-btn.dropdown-wrapper.show-dropdown -->
+        <ul class="navbar-list" *ngIf="user"><!--li.item-btn.dropdown-wrapper.show-dropdown -->
           <li class="item-btn dropdown-wrapper">
-              <img src="/images/user.png"/>
-              <span class="name">John Doe</span>
+              <img src="{{ user.pic ? user.pic : '/assets/images/user.png' }}"/>
+              <span class="name">{{ user.name }}</span>
               <i class="fas fa-sort-down"></i>
             <ul class="list-item-dropdown dropdown-menu">
               <li><a class="active" href="#">Companies</a></li>

@@ -65,7 +65,7 @@ export class AuthService{
      * Return a copy of user object
      */
     getUser(){
-        return {...this.user};
+        return this.userObj ? {...this.userObj} : null;
     }
 
     /**
