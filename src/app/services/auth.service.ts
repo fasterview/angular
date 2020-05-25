@@ -10,7 +10,7 @@ export class AuthService{
     state: Subject<boolean> = new Subject<boolean>();   // To omit the state changes
     user: Subject<Object> = new Subject<Object>();
 
-    private isLogged: boolean = false;
+    private logged: boolean = false;
     private access_token: string = "";
     private userObj: any = null;
 
@@ -69,12 +69,19 @@ export class AuthService{
     }
 
     /**
-     * Change isLogged value then omit the new value to listeners
+     * Return logged value
+     */
+    isLogged(): boolean{
+        return this.logged;
+    }
+
+    /**
+     * Change logged value then omit the new value to listeners
      * @param state 
      */
     private changeState(state: boolean){
-        this.isLogged = state;
-        this.state.next(this.isLogged);
+        this.logged = state;
+        this.state.next(this.logged);
     }
 
 
