@@ -19,7 +19,6 @@ export class HeaderComponent implements OnInit {
       this.user = user;
     })
     this.user = this._auth.getUser();
-    console.log(this.user);
   }
 
 }
