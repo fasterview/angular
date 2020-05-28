@@ -21,4 +21,11 @@ export class HeaderComponent implements OnInit {
     this.user = this._auth.getUser();
   }
 
+  /**
+   * Log the user out
+   */
+  logout(){
+    this._auth.logout();
+  }
+
 }

@@ -52,6 +52,8 @@ export class AuthService{
         this.access_token = "";
         this.changeState(false);
         this.user.next(null);
+
+        this._router.navigate(['/']);
     }
 
     /**
