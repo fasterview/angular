@@ -21,4 +21,5 @@ import { AuthService } from './core/services/auth.service';
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  constructor(private _auth: AuthService){}
  }

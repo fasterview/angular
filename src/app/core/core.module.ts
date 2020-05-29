@@ -12,6 +12,7 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { AuthService } from './services/auth.service';
 import { AppRoutingModule } from '../app-routing.module';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { HomeComponent } from './components/home/home.component';
 
 
 
@@ -22,6 +23,7 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
     FooterComponent,
     LoginComponent,
     RegisterComponent,
+    HomeComponent,
   ],
   imports: [
     CommonModule,

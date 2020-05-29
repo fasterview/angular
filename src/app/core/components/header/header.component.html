@@ -23,8 +23,9 @@
               <span class="name">{{ user.name }}</span>
               <i class="fas fa-sort-down"></i>
             <ul class="list-item-dropdown dropdown-menu">
-              <li><a class="active" href="#">Companies</a></li>
-              <li><a href="/profile">Profile</a></li>
+              <li>
+                <a routerLink="/profile" routerLinkActive="active">Profile</a>
+              </li>
               <li (click)="logout()"><a>Logout</a></li>
             </ul>
           </li>

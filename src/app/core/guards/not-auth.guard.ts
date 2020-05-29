@@ -15,7 +15,7 @@ export class NotAuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
       if(this._auth.isLogged()){
-        this._router.navigate(["/"]);
+        this._router.navigate(["/profile"]);
         return false;
       } else {
         return true;
