@@ -22,6 +22,7 @@ export class AuthService{
             this.login(access_token);
             this.storeUser(JSON.parse(localStorage.getItem("user")));
         }
+        console.log("INIT");
 
     }
 
@@ -51,7 +52,7 @@ export class AuthService{
         localStorage.clear();
         this.access_token = "";
         this.changeState(false);
-        this.user.next(null);
+        this.storeUser(null);
 
         this._router.navigate(['/']);
     }
@@ -113,7 +114,9 @@ export class AuthService{
         this.userObj = user;
         this.user.next(this.userObj);
 
-        localStorage.setItem("user", JSON.stringify(this.userObj));
+        if(user){
+            localStorage.setItem("user", JSON.stringify(this.userObj));
+        }
     }
 
 

@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './components/auth/login/login.component';
-import { RegisterComponent } from './components/auth/register/register.component';
-import { NotAuthGuard } from './guards/not-auth.guard';
+
+import { LoginComponent } from './core/components/auth/login/login.component';
+import { RegisterComponent } from './core/components/auth/register/register.component';
+
+import { NotAuthGuard } from './core/guards/not-auth.guard';
+
 
 
 const routes: Routes = [
