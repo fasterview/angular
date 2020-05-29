@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
@@ -17,12 +17,13 @@ export class AuthService{
 
     constructor(private _router: Router, private _http: HttpClient){
 
-        let access_token = localStorage.getItem("access_token");
-        if(access_token){   // Log the user in
-            this.login(access_token);
-            this.storeUser(JSON.parse(localStorage.getItem("user")));
-        }
-        console.log("INIT");
+        setTimeout(()=>{
+            let access_token = localStorage.getItem("access_token");
+            if(access_token){   // Log the user in
+                this.login(access_token);
+                this.storeUser(JSON.parse(localStorage.getItem("user")));
+            }
+        },0)
 
     }
 
@@ -93,12 +94,8 @@ export class AuthService{
      */
     private fetchUser(){
         
-        let headers = new HttpHeaders().set("Authorization", "Bearer " + this.access_token)
-
         this._http
-        .get(environment.url("api/me"), {
-            headers 
-        })
+        .get(environment.url("api/me"))
         .subscribe((res)=>{
             this.storeUser(res);
         },

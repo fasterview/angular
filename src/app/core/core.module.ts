@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '../shared/shared.module';
@@ -11,6 +11,7 @@ import { RegisterComponent } from './components/auth/register/register.component
 
 import { AuthService } from './services/auth.service';
 import { AppRoutingModule } from '../app-routing.module';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 
 
@@ -36,7 +37,8 @@ import { AppRoutingModule } from '../app-routing.module';
     RegisterComponent,
   ],
   providers: [
-    AuthService
+    AuthService,
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
   ],
 })
 export class CoreModule { }
