@@ -35,7 +35,9 @@
             <a href="#">
               <div class="interview-card">
                 <h3>{{ c.name }}</h3>
-                <h4 class="text-violet my-0">User Role</h4>
+                <h4 class="text-violet my-0" *ngIf="c.is_owner">
+                  Owner <i class="fas fa-crown"></i>
+                </h4>
               </div>
             </a>
           </div>
