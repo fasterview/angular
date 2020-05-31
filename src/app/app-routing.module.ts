@@ -20,6 +20,7 @@ const routes: Routes = [
   },
   {path: "login", component: LoginComponent, canActivate: [NotAuthGuard]},
   {path: "register", component: RegisterComponent, canActivate: [NotAuthGuard]},
+  {path: "org", loadChildren: ()=> import("./features/org/org.module").then( m => m.OrgModule )},
   {path: "not-found", component: Error404Component},
   {path: "**", redirectTo: "not-found"},
 ];
