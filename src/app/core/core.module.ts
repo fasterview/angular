@@ -13,6 +13,7 @@ import { AuthService } from './services/auth.service';
 import { AppRoutingModule } from '../app-routing.module';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { HomeComponent } from './components/home/home.component';
+import { Error404Component } from './components/errors/error404/error404.component';
 
 
 
@@ -24,6 +25,7 @@ import { HomeComponent } from './components/home/home.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
+    Error404Component,
   ],
   imports: [
     CommonModule,

@@ -31,7 +31,7 @@ export class AuthService {
    *
    * @param access_token
    */
-  login(access_token) {
+  login(access_token, redirect: boolean = false) {
     localStorage.setItem('access_token', access_token);
     this.access_token = access_token;
     this.changeState(true);
@@ -40,7 +40,9 @@ export class AuthService {
     // That the user data is up-to-date
     this.fetchUser();
 
-    this._router.navigate(['/']);
+    if(redirect){
+      this._router.navigate(['/profile']);
+    }
   }
 
   /**

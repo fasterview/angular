@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
       })
     ).subscribe(
       (res: {access_token: string})=>{
-        this._auth.login(res.access_token);
+        this._auth.login(res.access_token, true);
       },
       (err)=>{
         console.log(err);

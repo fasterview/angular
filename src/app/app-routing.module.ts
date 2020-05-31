@@ -7,6 +7,7 @@ import { RegisterComponent } from './core/components/auth/register/register.comp
 import { NotAuthGuard } from './core/guards/not-auth.guard';
 import { HomeComponent } from './core/components/home/home.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import { Error404Component } from './core/components/errors/error404/error404.component';
 
 
 
@@ -19,6 +20,8 @@ const routes: Routes = [
   },
   {path: "login", component: LoginComponent, canActivate: [NotAuthGuard]},
   {path: "register", component: RegisterComponent, canActivate: [NotAuthGuard]},
+  {path: "not-found", component: Error404Component},
+  {path: "**", redirectTo: "not-found"},
 ];
 
 @NgModule({
