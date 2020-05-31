@@ -1,1 +1,47 @@
-<p>profile works!</p>
+<div class="container-fluid profile-container">
+  <div class="user-info-container bg-white">
+    <div class="row">
+      <div class="col-sm-8 col-lg-6 mx-auto">
+        <div class="user-info">
+          <img
+            class="user-pic"
+            [src]="user.pic ? user.pic : '/assets/images/user.png'"
+          />
+          <span class="user-name">{{ user.name | titlecase }}</span>
+          <p class="user-bio" *ngIf="user.bio">{{ user.bio }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ Companies ============ -->
+<div *ngIf="!loaded" class="text-center mt-30">
+    <div class="lds-dual-ring"></div>
+</div>
+<div class="companies container" *ngIf="loaded">
+  <h2 class="mt-30 companies-header col-12 text-center" *ngIf="!comps.length">
+    You Don't Work On A Company Yet!
+  </h2>
+  <div *ngIf="comps.length">
+    <h2 class="mt-30 companies-header col-12">
+      Companies You Work On
+    </h2>
+    <section class="interviews-container bg-white mb-30">
+      <div class="interview-cards row align-end">
+
+        <div class="col-lg-3 col-md-6 col-12" *ngFor="let c of comps">
+          <div class="bg-light company-card">
+            <a href="#">
+              <div class="interview-card">
+                <h3>{{ c.name }}</h3>
+                <h4 class="text-violet my-0">User Role</h4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+</div>
