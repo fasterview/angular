@@ -30,9 +30,9 @@
     <section class="interviews-container bg-white mb-30">
       <div class="interview-cards row align-end">
 
-        <div class="col-lg-3 col-md-6 col-12" *ngFor="let c of comps">
+        <div class="col-lg-3 col-md-6 col-12 my-10" *ngFor="let c of comps">
           <div class="bg-light company-card">
-            <a href="#">
+            <a [routerLink]="'/org/' + c.id">
               <div class="interview-card">
                 <h3>{{ c.name }}</h3>
                 <h4 class="text-violet my-0" *ngIf="c.is_owner">

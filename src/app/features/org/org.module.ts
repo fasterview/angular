@@ -5,12 +5,13 @@ import { OrgRoutingModule } from './org-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { OrgService } from './services/org.service';
+import { ShowComponent } from './components/show/show.component';
 
 
 
 
 @NgModule({
-  declarations: [CreateComponent],
+  declarations: [CreateComponent, ShowComponent],
   imports: [
     SharedModule,
     ReactiveFormsModule,

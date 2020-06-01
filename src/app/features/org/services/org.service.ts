@@ -18,4 +18,9 @@ export class OrgService {
   create(body: {name: string}){
     return this._http.post(environment.url('api/organization'), body);
   }
+
+
+  get(id: number|string){
+    return this._http.get(environment.url("api/organization/" + id));
+  }
 }
