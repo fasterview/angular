@@ -11,7 +11,6 @@ import { RegisterComponent } from './components/auth/register/register.component
 
 import { AuthService } from './services/auth.service';
 import { AppRoutingModule } from '../app-routing.module';
-import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { HomeComponent } from './components/home/home.component';
 import { Error404Component } from './components/errors/error404/error404.component';
 
@@ -42,7 +41,6 @@ import { Error404Component } from './components/errors/error404/error404.compone
   ],
   providers: [
     AuthService,
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
   ],
 })
 export class CoreModule { }

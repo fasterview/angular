@@ -1,0 +1,44 @@
+<div class="container mt-30">
+    <h1 class="text-center">Create An Organization</h1>
+    <form 
+          class="form-small create-interview-form my-30" 
+          [formGroup]="createForm" 
+          (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-md-8 col-12 mx-auto">
+          <div class="row">
+            <div class="col-12 form-group">
+              <div class="form-group">
+                <label>Organization Name</label>
+                <input 
+                    type="text" 
+                    formControlName="name"
+                    [class.invalid]="createForm.get('name').invalid && createForm.get('name').touched"/>
+              </div>
+              <span class="error-msg" *ngIf="createForm.get('name').invalid && createForm.get('name').touched">
+                <small *ngIf="createForm.get('name').errors.required">
+                    The name is required
+                </small>
+                <small *ngIf="createForm.get('name').errors.minlength">
+                    The name can't be less than 3 characters long
+                </small>
+                <small *ngIf="createForm.get('name').errors.maxlength">
+                    The name can't be more than 255 characters long
+                </small>
+              </span>
+            </div>
+          </div>
+        
+          <div class="col-12 mt-20">
+            <div class="form-group">
+              <button
+                    class="btn btn-blue px-30" 
+                    type="submit"
+                    [disabled]="createForm.invalid || isLoading">Create</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </form>
+  </div>

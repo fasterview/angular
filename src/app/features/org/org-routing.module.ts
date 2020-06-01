@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CreateComponent } from './create/create.component';
+import { CreateComponent } from './components/create/create.component';
 
 
 
