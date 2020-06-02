@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { InterviewRoutingModule } from './interview-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { CreateComponent } from './components/create/create.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [CreateComponent],
   imports: [
     CommonModule,
     InterviewRoutingModule,
