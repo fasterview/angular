@@ -8,7 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 
 
 const routes: Routes = [
-  {path: ":id", component: HomeComponent, children: [
+  {path: "", component: HomeComponent, children: [
     {path: "", component: ShowComponent},
     {path: "interview", loadChildren: () => import("./interview/interview.module").then( m => m.InterviewModule )},
   ]},

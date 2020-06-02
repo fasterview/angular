@@ -8,7 +8,23 @@ import { HttpClient } from "@angular/common/http";
 })
 export class OrgService {
 
+  org: any = null;  // Organiztion
+
   constructor(private _http: HttpClient) { }
+
+  /**
+   * Set org value
+   */
+  setOrg(org: any){
+    this.org = org;
+  }
+
+  /**
+   * Return the "org" value
+   */
+  getOrg(){
+    return this.org;
+  }
 
 
   /**
