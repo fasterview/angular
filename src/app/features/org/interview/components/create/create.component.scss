@@ -1,0 +1,15 @@
+input[type="text"][disabled]{
+    opacity: .8;
+    cursor: not-allowed;
+}
+
+.add-btn:not(.disabled){
+    &:active{
+        transform: scale(.9);
+    }
+}
+
+.add-btn.disabled{
+    opacity: .4;
+    cursor: not-allowed;
+}

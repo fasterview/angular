@@ -1,1 +1,125 @@
-<p>create works!</p>
+<div class="container mt-30">
+  <h1 class="text-center">Create New Interview</h1>
+  <form
+    class="form-small create-interview-form my-30"
+    [formGroup]="createForm"
+    (ngSubmit)="submit()"
+  >
+    <div class="row">
+      <div class="col-md-8 col-12 mx-auto">
+        <div class="row">
+          <div class="col-12 form-group">
+            <div class="form-group">
+              <label>Organization</label>
+              <input type="text" disabled [value]="org.name" />
+            </div>
+          </div>
+          <div class="col-12 form-group">
+            <div class="form-group">
+              <label>Position</label>
+              <input
+                type="text"
+                formControlName="role"
+                [class.invalid]="
+                  createForm.get('role').invalid &&
+                  createForm.get('role').touched
+                "
+              />
+              <span
+                class="error-msg"
+                *ngIf="
+                  createForm.get('role').invalid &&
+                  createForm.get('role').touched
+                "
+              >
+                <small *ngIf="createForm.get('role').errors.required">
+                  This field is required
+                </small>
+                <small *ngIf="createForm.get('role').errors.minlength">
+                  Position can't be less than 3 characters long
+                </small>
+                <small *ngIf="createForm.get('role').errors.maxlength">
+                  Position can't be more than 50 characters long
+                </small>
+              </span>
+            </div>
+          </div>
+          <div class="col-12">
+            <h1 class="my-10">Questions</h1>
+          </div>
+        </div>
+        <div
+          formArrayName="questions"
+          *ngFor="
+            let q of createForm.get('questions')['controls'];
+            let i = index
+          "
+        >
+          <div class="row my-10" [formGroupName]="i">
+            <div class="col-md-7 col-12 form-group">
+              <div class="form-group">
+                <label>{{ i + 1 }}- Question Header:</label>
+                <input
+                  type="text"
+                  formControlName="title"
+                  [class.invalid]="
+                    q.get('title').invalid && q.get('title').touched
+                  "
+                />
+                <span
+                  class="error-msg"
+                  *ngIf="q.get('title').invalid && q.get('title').touched"
+                >
+                  <small *ngIf="q.get('title').errors.required">
+                    This field is required
+                  </small>
+                  <small *ngIf="q.get('title').errors.minlength">
+                    Can't be less than 8 charactes long
+                  </small>
+                  <small *ngIf="q.get('title').errors.maxlength">
+                    Can't be more than 100 charactes long
+                  </small>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-4 col-12 form-group">
+              <div class="form-group">
+                <label>Question Time:</label>
+                <input type="number" min="1" max="5" formControlName="time" />
+              </div>
+            </div>
+            <div class="col-md-1 d-flex align-center">
+              <button
+                *ngIf="i > 0"
+                class="btn-sm btn-red text-white"
+                (click)="deleteQuestion(i)"
+              >
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 d-flex">
+          <div class="mb-30 ml-auto">
+            <span 
+                class="add-btn"
+                [class.disabled]="createForm.get('questions').invalid"
+                (click)="createQuestion()"></span>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group col-12">
+            <button
+              class="btn btn-blue px-30"
+              type="submit"
+              [disabled]="createForm.invalid || isLoading"
+            >
+              Create
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
