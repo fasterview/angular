@@ -3,6 +3,7 @@ import { OrgService } from '../../../services/org.service';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { InterviewService } from '../../interview.service';
 import { finalize } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create',
@@ -15,7 +16,7 @@ export class CreateComponent implements OnInit {
   createForm: FormGroup;
   isLoading: boolean = false;
 
-  constructor(private _org: OrgService, private _inter: InterviewService) { }
+  constructor(private _org: OrgService, private _inter: InterviewService, private _router: Router) { }
 
   ngOnInit(): void {
     
@@ -67,8 +68,9 @@ export class CreateComponent implements OnInit {
 
     this._inter.create(this.org.id, this.createForm.value)
                 .pipe(finalize(()=>{ this.isLoading = false; }))
-                .subscribe((res)=>{
-                  console.log(res);
+                .subscribe((res: any)=>{
+                  // Redirect the uesr to vew interview page
+                  this._router.navigate(['/interview/' + res.interview.id]);
                 })
   }
 

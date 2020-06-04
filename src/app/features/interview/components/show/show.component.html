@@ -1,0 +1,42 @@
+<div class="mt-30">
+    <div class="container-fluid">
+      
+      <!-- Loading icon -->
+      <div *ngIf="isLoading" class="text-center mt-30">
+        <div class="lds-dual-ring"></div>
+      </div>
+
+      <div class="col-12 dashboard-container" *ngIf="!isLoading">
+        <h2>{{ interview.role }} <span class="font-light">At </span>{{ interview.org.name }}</h2>
+        <h2>Interview Questions</h2>
+        <section class="table-wrapper">
+          <table>
+            <thead>                                                  
+              <tr>
+                <td>Question</td>
+                <td>Time</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let q of interview.questions">
+                <td class="font-bold">{{ q.title }}</td>
+                <td class="font-bold">{{ q.time }} Minutes</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="mt-20">
+          
+          <!-- Edit button -->
+          <button class="btn-dark" *ngIf="this.user.id == interview.org.user_id; else start">Edit</button>
+          
+          <!-- Start button -->
+          <ng-template #start>
+            <button class="btn-blue">Start</button>
+          </ng-template>
+          
+
+        </section>
+      </div>
+    </div>
+  </div>

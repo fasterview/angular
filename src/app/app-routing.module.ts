@@ -18,6 +18,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import("./features/user/user.module").then(m => m.UserModule)
   },
+  {
+    path: "interview",
+    canActivate: [AuthGuard],
+    loadChildren: () => import("./features/interview/interview.module").then( m => m.InterviewModule)
+  },
   {path: "login", component: LoginComponent, canActivate: [NotAuthGuard]},
   {path: "register", component: RegisterComponent, canActivate: [NotAuthGuard]},
   {path: "org", loadChildren: ()=> import("./features/org/org.module").then( m => m.OrgModule )},
