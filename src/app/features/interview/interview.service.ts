@@ -7,7 +7,25 @@ import { environment } from 'src/environments/environment';
 })
 export class InterviewService {
 
+  interview: any = null;
+
   constructor(private _http: HttpClient) { }
+
+
+  /**
+   * Return a copy of interview object
+   */
+  getInterview(){
+    return this.interview ? {...this.interview} : null;
+  }
+
+  /**
+   * Set interview value
+   */
+  setInterview(inter: any){
+    this.interview = inter;
+  }
+
 
   /**
    * Fetch interview data from the API
@@ -15,4 +33,6 @@ export class InterviewService {
   get(id: string | number){
     return this._http.get(environment.url("api/interview/" + id));
   }
+
+
 }

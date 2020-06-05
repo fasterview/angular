@@ -6,10 +6,11 @@ import { ShowComponent } from './components/show/show.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
-  declarations: [ShowComponent],
+  declarations: [ShowComponent, HomeComponent],
   imports: [
     SharedModule,
     InterviewRoutingModule,

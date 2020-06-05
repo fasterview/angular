@@ -12,23 +12,13 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class ShowComponent implements OnInit {
 
   interview: any = null;
-  isLoading: boolean = false;
-  id: number | string = null;
   user: any = null;
 
-  constructor(private _inter: InterviewService, private _route: ActivatedRoute, private _auth: AuthService) { }
+  constructor(private _inter: InterviewService, private _auth: AuthService) { }
 
   ngOnInit(): void {
 
-    this.id = this._route.snapshot.params.id;
-    
-    this.isLoading = true;
-
-    this._inter.get(this.id)
-              .pipe(finalize( () => this.isLoading = false))
-              .subscribe((res: any) => {
-                this.interview = res.interview;
-              });
+    this.interview = this._inter.getInterview();
 
     // Get user
     this._auth.user.subscribe( user => this.user = user);
