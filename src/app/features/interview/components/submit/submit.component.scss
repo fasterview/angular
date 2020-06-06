@@ -1,0 +1,35 @@
+.interview-container{
+    height: 100vh;
+    min-height: 300px;
+    max-height: 700px;
+    background-color: #588df8;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.text-container{
+    text-align: center;
+}
+
+.btn-group{
+    .btn{
+        margin-right: 20px;
+    }
+}
+
+.video-record-container{
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+
+    video{
+        max-width: 200px;
+        max-height: 400px;
+    }
+}

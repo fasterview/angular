@@ -1,0 +1,24 @@
+<div class="interview-container">
+
+    <div class="text-container">
+
+        <div class="msg">
+            <h1 *ngIf="!hasAccess">
+                Enable the video then click start
+            </h1>
+            <h2>{{ interview.role }} <span class="font-light">At </span>{{ interview.org.name }}</h2>
+        </div>
+        <div class="my-10"></div>
+        <div class="btn-group">
+            <button class="btn btn-dark text-light">Back</button>
+            <button class="btn btn-light text-dark" [disabled]="!hasAccess">Start</button>
+        </div>
+    </div>
+
+
+    <!-- Video -->
+    <div class="video-record-container" [ngStyle]="{'display': hasAccess ? '' : 'none'}">
+        <video #recordVideo></video>
+    </div>
+
+</div>

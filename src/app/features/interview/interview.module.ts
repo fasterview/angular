@@ -7,10 +7,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
+import { SubmitComponent } from './components/submit/submit.component';
 
 
 @NgModule({
-  declarations: [ShowComponent, HomeComponent],
+  declarations: [ShowComponent, HomeComponent, SubmitComponent],
   imports: [
     SharedModule,
     InterviewRoutingModule,
