@@ -16,6 +16,7 @@ import { SubmitComponent } from './components/submit/submit.component';
     SharedModule,
     InterviewRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule
   ]
 })
 export class InterviewModule { }

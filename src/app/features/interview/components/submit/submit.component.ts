@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { InterviewService } from '../../interview.service';
 
+declare var MediaRecorder : any;  // Media record is not known by TS
+
 @Component({
   selector: 'app-submit',
   templateUrl: './submit.component.html',
@@ -11,6 +13,13 @@ export class SubmitComponent implements OnInit {
   interview: any = null;
   hasAccess: boolean = false;  // If the app has access to user media or not
   stream: any = null; // Stream object
+  recorder: any;  // MediaRecorder for recording
+  chunks: any[] = [];  // Recorded chunks
+  blob: Blob; // The blob to by uplaoded to the API
+  videoURL: any;  // Recorded video url object
+  isRecording: boolean = false;  // True if the video is been recording
+  recorded: boolean = false;  // True if recording precess is done
+
 
   @ViewChild("recordVideo") recordVideo;
 
@@ -27,11 +36,13 @@ export class SubmitComponent implements OnInit {
   /**
    * Get Access to the user media
    */
-  async getAccess(){
+  getAccess(){
 
     let constraints: any = {
       audio: true,
-      video: true
+      video: {
+        facingMode: "user"
+      }
     }
     
     navigator.mediaDevices
@@ -50,6 +61,9 @@ export class SubmitComponent implements OnInit {
                   video.muted = true;
                 };
 
+                
+                this.recorder = new MediaRecorder(this.stream);
+
                 this.hasAccess = true;
               } )
               .catch( err => {
@@ -63,7 +77,39 @@ export class SubmitComponent implements OnInit {
    * Start interview recording
    */
   start(){
+    this.recorder.start();  // Start recording
+    this.isRecording = true;
 
+
+    /**
+     * Define methods
+     * 
+     * I didn't choose "addEventListener" because there will be only on method
+     * 
+     */
+
+
+    //  Push data chunks to the array
+    this.recorder.ondataavailable = (e) => {
+      this.chunks.push(e.data)
+      console.log("Data is avaliable");
+      console.log(this.chunks[this.chunks.length - 1]);
+    }
+
+    // Converted the recorded data to Blob and clear the chunks array
+    // And generate url for preview 
+    this.recorder.onstop = ()=>{
+      // Convert the chunks to blob with video/mp4 type
+      this.blob = new Blob(this.chunks, {'type': 'video/mp4'});
+
+      this.chunks = [];
+
+      this.videoURL = URL.createObjectURL(this.blob);
+
+      this.recorded = true;
+      this.isRecording = false;
+    }
+    
   }
 
 
@@ -71,7 +117,7 @@ export class SubmitComponent implements OnInit {
    * Strop recording
    */
   stop(){
-
+    this.recorder.stop(); // Stop recording
   }
 
 }
