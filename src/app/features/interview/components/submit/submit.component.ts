@@ -21,7 +21,7 @@ export class SubmitComponent implements OnInit {
   recorded: boolean = false;  // True if recording precess is done
   currentIndex: number = 0;  // Current shown question index
   lastQuestion: boolean = false;  // True if the user in the last question
-
+  allowNext: boolean = true;  // True if the question was displayed atleast 30 seconds
 
 
   @ViewChild("recordVideo") recordVideo;
@@ -136,6 +136,13 @@ export class SubmitComponent implements OnInit {
       this.lastQuestion = true;
     }
 
+
+    // Allow the user to click next/finish button after 30 seconds
+    this.allowNext = false;
+    setTimeout(()=>{
+      this.allowNext = true;
+    }, 30 * 1000); 
+
   }
 
 
@@ -170,7 +177,6 @@ export class SubmitComponent implements OnInit {
 
     // Set "recorded" property to true
     this.recorded = true;
-
   }
 
 

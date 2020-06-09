@@ -26,10 +26,18 @@
                     </span>
                 </h1>
             </div>
-            <div class="my-10"></div>
-            <div class="btn-group">
-                <button class="btn btn-light text-dark" (click)="next()" *ngIf="!lastQuestion">Next</button>
-                <button class="btn btn-green text-light" (click)="finish()" *ngIf="lastQuestion">Finish</button>
+            <div class="btn-group my-10">
+                <button 
+                        class="btn btn-light text-dark" 
+                        [disabled]="!allowNext"
+                        (click)="next()" 
+                        *ngIf="!lastQuestion">Next</button>
+
+                <button 
+                        class="btn btn-green text-light" 
+                        [disabled]="!allowNext" 
+                        (click)="finish()" 
+                        *ngIf="lastQuestion">Finish</button>
             </div>
         </div>
 
