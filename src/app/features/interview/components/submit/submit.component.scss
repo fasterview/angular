@@ -64,3 +64,16 @@
     50%{opacity: 1;}
     100%{opacity: 0;}
 }
+
+.progress{
+    height: 10px;
+    background-color: red;
+    width: 10%;
+    transition: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transition-delay: 0s;
+    transition-property: width;
+    transition-timing-function: linear;
+}

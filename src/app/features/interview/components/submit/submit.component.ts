@@ -21,10 +21,13 @@ export class SubmitComponent implements OnInit {
   recorded: boolean = false;  // True if recording precess is done
   currentIndex: number = 0;  // Current shown question index
   lastQuestion: boolean = false;  // True if the user in the last question
-  allowNext: boolean = true;  // True if the question was displayed atleast 30 seconds
+  allowNext: boolean = false;  // True if the question was displayed atleast 30 seconds
+  nextTimeout: any = null;  // Move to next question timeout
+
 
 
   @ViewChild("recordVideo") recordVideo;
+  @ViewChild("progress") progress;
   // @ViewChild("preview") previewVideo;
 
   constructor(private _inter: InterviewService) { }
@@ -84,7 +87,6 @@ export class SubmitComponent implements OnInit {
     this.recorder.start();  // Start recording
     this.isRecording = true;
 
-
     /**
      * Define methods
      * 
@@ -113,6 +115,20 @@ export class SubmitComponent implements OnInit {
 
       // this.previewVideo.nativeElement.src = this.videoURL;
     }
+
+
+    // Allow after 30 seconds
+    this.allowNext = false;
+    setTimeout(()=>{
+      this.allowNext = true;
+    }, 30 * 1000); 
+
+    // Go to next qusetion timeout
+    this.nextTimeout = setTimeout(()=>{ 
+      this.next();
+    }, this.interview.questions[this.currentIndex].time * 1000 * 60);
+    
+    this.switchClass();
     
   }
 
@@ -130,10 +146,23 @@ export class SubmitComponent implements OnInit {
    */
   next(){
     this.currentIndex++;
+    // Clear timeout
+    clearTimeout(this.nextTimeout);
 
     if(this.currentIndex == this.interview.questions.length - 1){
       // Finish button
       this.lastQuestion = true;
+
+      // Go the next question automatically after the qeustion time ended
+      this.nextTimeout = setTimeout(()=>{
+        this.finish();
+      }, this.interview.questions[this.currentIndex].time * 1000 * 60);
+    } else {
+      // Go the next question automatically after the qeustion time ended
+      this.nextTimeout = setTimeout(()=>{ 
+        this.next();
+      }, this.interview.questions[this.currentIndex].time * 1000 * 60);
+
     }
 
 
@@ -142,6 +171,9 @@ export class SubmitComponent implements OnInit {
     setTimeout(()=>{
       this.allowNext = true;
     }, 30 * 1000); 
+
+    this.switchClass();
+
 
   }
 
@@ -156,6 +188,8 @@ export class SubmitComponent implements OnInit {
    * 4- Set "recorded" property to true
    */
   finish(){
+
+    if(this.recorded) return;
     
     // Stop recording
     this.stop();
@@ -180,5 +214,17 @@ export class SubmitComponent implements OnInit {
   }
 
 
+  /**
+   * Switch class on progress bar
+   */
+    switchClass(){
+      this.progress.nativeElement.style.transitionDuration = "0s";
+      this.progress.nativeElement.style.width = "0%";
+      setTimeout(()=>{
+        this.progress.nativeElement.style.transitionDuration = (this.interview.questions[this.currentIndex].time * 60) +'s';
+        this.progress.nativeElement.style.width = "100%";
+      }, 10)
+      
+    }
 
 }

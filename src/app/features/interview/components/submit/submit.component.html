@@ -43,6 +43,11 @@
 
     </div>
 
+    <div 
+            #progress
+            class="progress" 
+            [ngStyle]="{'display': isRecording ? '' : 'none'}"></div>
+
     <!-- This div contains submit, back and preview -->
     <div class="text-container" *ngIf="recorded">
         <div class="btn-group">
