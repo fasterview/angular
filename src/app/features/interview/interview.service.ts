@@ -35,4 +35,8 @@ export class InterviewService {
   }
 
 
+  submit(data){
+    return this._http.post(environment.url("api/interview/" + this.interview.id + "/submit"), data);
+  }
+
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { InterviewService } from '../../interview.service';
+import { FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
 
 declare var MediaRecorder : any;  // Media record is not known by TS
 
@@ -25,6 +26,9 @@ export class SubmitComponent implements OnInit {
   nextTimeout: any = null;  // Move to next question timeout
 
 
+  form: FormGroup;
+
+
 
   @ViewChild("recordVideo") recordVideo;
   @ViewChild("progress") progress;
@@ -38,6 +42,12 @@ export class SubmitComponent implements OnInit {
 
     // Get access to user media
     this.getAccess();
+
+    // Intialize the form
+    this.form = new FormGroup({
+      "questions": new FormArray([], {validators: [Validators.required]}),
+      video: new FormControl("")
+    });
   }
 
   /**
@@ -105,6 +115,9 @@ export class SubmitComponent implements OnInit {
     this.recorder.onstop = ()=>{
       // Convert the chunks to blob with video/mp4 type
       this.blob = new Blob(this.chunks, {'type': 'video/mp4'});
+      
+      // Store the blob object in a file
+      this.form.value.video = this.blob;
 
       this.chunks = [];
 
@@ -121,7 +134,7 @@ export class SubmitComponent implements OnInit {
     this.allowNext = false;
     setTimeout(()=>{
       this.allowNext = true;
-    }, 30 * 1000); 
+    }, 5 * 1000); 
 
     // Go to next qusetion timeout
     this.nextTimeout = setTimeout(()=>{ 
@@ -130,6 +143,11 @@ export class SubmitComponent implements OnInit {
     
     this.switchClass();
     
+
+    (this.form.get("questions") as FormArray).push(new FormGroup({
+      time: new FormControl(0)
+    }))
+
   }
 
 
@@ -170,10 +188,15 @@ export class SubmitComponent implements OnInit {
     this.allowNext = false;
     setTimeout(()=>{
       this.allowNext = true;
-    }, 30 * 1000); 
+    }, 5 * 1000); 
 
     this.switchClass();
 
+
+    // Add form input
+    (this.form.get("questions") as FormArray).push(new FormGroup({
+      time: new FormControl(parseInt(this.recordVideo.nativeElement.currentTime))
+    }))
 
   }
 
@@ -224,7 +247,30 @@ export class SubmitComponent implements OnInit {
         this.progress.nativeElement.style.transitionDuration = (this.interview.questions[this.currentIndex].time * 60) +'s';
         this.progress.nativeElement.style.width = "100%";
       }, 10)
+    }
+
+
+    /**
+     * Submit the form
+     */
+    submit(){
       
+      let fd = new FormData();
+      let value = this.form.value;
+
+      for(let i = 0; i < value.questions.length; i++){
+        console.log(value.questions[i]);
+        fd.append("questions[" + i + "][time]", value.questions[i].time)
+      }
+
+      // File
+      fd.append("video", this.blob, "video.mp4");
+      console.log(this.blob.type);
+
+      this._inter.submit(fd)
+                .subscribe((res)=>{
+                  console.log(res);
+                })
     }
 
 }
