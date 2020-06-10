@@ -51,7 +51,7 @@
     <!-- This div contains submit, back and preview -->
     <div class="text-container" *ngIf="recorded">
         <div class="btn-group">
-            <button class="btn btn-light text-dark">Preview</button>
+            <button class="btn btn-light text-dark" (click)="preview()">Preview</button>
             <button class="btn btn-green text-dark" (click)="submit()">Submit</button>
         </div>
         <div class="btn-group mt-30">
@@ -68,7 +68,7 @@
 
 </div>
 
-
+<app-preview-interview *ngIf="showPreview" [interview]="interviewPreview" (close)="closePreview()"></app-preview-interview>
 
 <!-- ============== To Be Deleted ============== -->
 

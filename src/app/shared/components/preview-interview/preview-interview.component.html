@@ -1,0 +1,22 @@
+<div class="preview-container">
+  <div class="overlay" (click)="closePreview()">
+    <i class="close-btn fas fa-times"></i>
+  </div>
+
+  <div class="video-container">
+    <video #video></video>
+
+    <div class="questions">
+      <div class="questions-wrapper" [ngStyle]="{transform: 'translateY(-'+ (currentIndex * 100) +'px)'}">
+        <div
+          class="q-wrapper"
+          *ngFor="let q of interview.questions; let i = index"
+        >
+          <span class="q">
+            {{ q.title }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -24,9 +24,15 @@ export class SubmitComponent implements OnInit {
   lastQuestion: boolean = false;  // True if the user in the last question
   allowNext: boolean = false;  // True if the question was displayed atleast 30 seconds
   nextTimeout: any = null;  // Move to next question timeout
+  showPreview: boolean = false; // Show and hide preview
 
 
   form: FormGroup;
+
+  interviewPreview: {video: string, questions: {title: string, time: string | number}[]} = {
+    video: "",
+    questions: []
+  }; // Recorded interview data to preview
 
 
 
@@ -122,6 +128,7 @@ export class SubmitComponent implements OnInit {
       this.chunks = [];
 
       this.videoURL = URL.createObjectURL(this.blob);
+      this.interviewPreview.video = this.videoURL;
 
       this.recorded = true;
       this.isRecording = false;
@@ -144,11 +151,10 @@ export class SubmitComponent implements OnInit {
     this.switchClass();
     
 
-    (this.form.get("questions") as FormArray).push(new FormGroup({
-      time: new FormControl(0)
-    }))
+    this.createInput(0);
 
   }
+
 
 
   /**
@@ -194,9 +200,7 @@ export class SubmitComponent implements OnInit {
 
 
     // Add form input
-    (this.form.get("questions") as FormArray).push(new FormGroup({
-      time: new FormControl(parseInt(this.recordVideo.nativeElement.currentTime))
-    }))
+    this.createInput();
 
   }
 
@@ -236,6 +240,24 @@ export class SubmitComponent implements OnInit {
     this.recorded = true;
   }
 
+   /**
+   * Create questions form control and add it
+   */
+  createInput(time = null){
+
+    time = time ? time : parseInt(this.recordVideo.nativeElement.currentTime);
+
+    (this.form.get("questions") as FormArray).push(new FormGroup({
+      time: new FormControl(time)
+    }))
+
+    // Add data to preview
+    this.interviewPreview.questions.push({
+      time: time,
+      title: this.interview.questions[this.currentIndex].title
+    })
+  }
+
 
   /**
    * Switch class on progress bar
@@ -272,5 +294,27 @@ export class SubmitComponent implements OnInit {
                   console.log(res);
                 })
     }
+
+
+    /**
+     * Open preview component
+     */
+    preview(){
+      this.showPreview = true;
+
+      console.log(this.interviewPreview);
+      
+
+    }
+
+
+    /**
+     * Open preview component
+     */
+    closePreview(){
+      this.showPreview = false;
+    }
+
+
 
 }
