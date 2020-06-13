@@ -26,7 +26,9 @@
           
           <!-- Start button -->
           <ng-template #start>
-            <button class="btn-blue" routerLink="submit">Start</button>
+            <button class="btn-blue" routerLink="submit" *ngIf="!interview.submitted">Start</button>
+
+            <span class="btn bg-dark text-light" *ngIf="interview.submitted">You submitted this interview</span>
           </ng-template>
           
 

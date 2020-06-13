@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { InterviewService } from '../../interview.service';
 import { FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 declare var MediaRecorder : any;  // Media record is not known by TS
 
@@ -40,11 +41,16 @@ export class SubmitComponent implements OnInit {
   @ViewChild("progress") progress;
   // @ViewChild("preview") previewVideo;
 
-  constructor(private _inter: InterviewService) { }
+  constructor(private _inter: InterviewService, private _router: Router) { }
 
   ngOnInit(): void {
     // Get interview value
     this.interview = this._inter.getInterview();
+
+    // Redirect back if this interview is submitted
+    if(this.interview.submitted){
+      this._router.navigate(['/interview', this.interview.id]);
+    }
 
     // Get access to user media
     this.getAccess();
