@@ -36,6 +36,14 @@ export class OrgService {
   }
 
 
+  /**
+   * Get submits for current org
+   */
+  submits(){
+    return this._http.get(environment.url("api/organization/" + this.org.id + "/submits"));
+  }
+
+
   get(id: number|string){
     return this._http.get(environment.url("api/organization/" + id));
   }

@@ -1,8 +1,51 @@
 <div class="mt-30">
-  <div class="container-fluid" *ngIf="org">
-    <h2 class="text-center mt-30">{{ org.name }}</h2>
-    <div class="col-12 text-right">
-        <a class="btn-sm btn-dark text-light" routerLink="interview/create">Create New Interview</a>
+  <div class="container-fluid">
+    <div class="col-12 dashboard-container">
+      <h2 class="text-center mt-30">{{ org.name }}</h2>
+      <div class="col-12 text-right">
+          <a class="btn-sm btn-dark text-light" routerLink="interview/create">Create New Interview</a>
+      </div>
+      <div class="interview-table">
+        <header class="d-flex justify-between align-center">
+          <h2>Last submitted interviews</h2>
+          <div class="search-form-container col-md-3 col-sm-4 col-12">
+            <!-- <form action="GET">
+              <input type="text" placeholder="Search"/>
+              <button><i class="fas fa-search"></i></button>
+            </form> -->
+          </div>
+        </header>
+        <section class="table-wrapper" *ngIf="submits.length">
+          <table>
+            <thead>                                                  
+              <tr>
+                <td></td>
+                <td>Name</td>
+                <td>Email</td>
+                <td>Position</td>
+                <td>Date</td>
+                <td>Status</td>
+                <td>Details</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let s of submits; let i = index;"> 
+                <td><img class="table-img" [src]="s.user.pic ? s.user.pic : '/assets/images/user.png'"/></td>
+                <td>{{ s.user.name }}</td>
+                <td>{{ s.user.email }}</td>
+                <td class="text-violet font-bold"> 
+                  <a href="#">{{ s.interview.role }}</a>
+                </td>
+                <td>{{ s.created_at }}</td>
+                <td> <span class="btn bg-green text-white">Pending</span></td>
+                <td> 
+                  <button class="bg-blue">View</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
     </div>
   </div>
 </div>

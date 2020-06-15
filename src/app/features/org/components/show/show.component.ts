@@ -11,6 +11,7 @@ import { finalize } from 'rxjs/operators';
 export class ShowComponent implements OnInit {
 
   org: any = null;
+  submits: any[] = [];
 
   constructor(private _org: OrgService, private _route: ActivatedRoute) { }
 
@@ -18,7 +19,11 @@ export class ShowComponent implements OnInit {
 
     // Get organization id
     this.org = this._org.getOrg();
-    
+
+    // Get latest submits for this org
+    this._org.submits().subscribe((res: any) => {
+      this.submits = res.data;
+    });
   }
 
 }
