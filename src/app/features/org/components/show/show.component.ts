@@ -12,6 +12,8 @@ export class ShowComponent implements OnInit {
 
   org: any = null;
   submits: any[] = [];
+  showPreview: boolean = false; // Show or hide interview preview component
+  interview = null;
 
   constructor(private _org: OrgService, private _route: ActivatedRoute) { }
 
@@ -24,6 +26,21 @@ export class ShowComponent implements OnInit {
     this._org.submits().subscribe((res: any) => {
       this.submits = res.data;
     });
+  }
+
+  /**
+   * Show interview video
+   */
+  showInterview(index: number){
+    this.interview = this.submits[index];
+    this.showPreview = true;
+  }
+
+  /**
+   * Close interview preview
+   */
+  closeInterview(){
+    this.showPreview = false;
   }
 
 }

@@ -39,7 +39,7 @@
                 <td>{{ s.created_at }}</td>
                 <td> <span class="btn bg-green text-white">Pending</span></td>
                 <td> 
-                  <button class="bg-blue">View</button>
+                  <button class="bg-blue" (click)="showInterview(i)">View</button>
                 </td>
               </tr>
             </tbody>
@@ -49,3 +49,7 @@
     </div>
   </div>
 </div>
+
+
+<!-- Interview preview-->
+<app-preview-interview *ngIf="showPreview" [interview]="interview" (close)="closeInterview()"></app-preview-interview>

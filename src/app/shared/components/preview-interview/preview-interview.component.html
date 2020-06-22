@@ -6,7 +6,7 @@
   <div class="video-container">
     <video #video></video>
 
-    <div class="questions">
+    <div class="questions" *ngIf="showQuestions">
       <div class="questions-wrapper" [ngStyle]="{transform: 'translateY(-'+ (currentIndex * 100) +'px)'}">
         <div
           class="q-wrapper"
@@ -18,5 +18,8 @@
         </div>
       </div>
     </div>
+
+    <div class="lds-dual-ring" *ngIf="!showQuestions"></div>
+
   </div>
 </div>

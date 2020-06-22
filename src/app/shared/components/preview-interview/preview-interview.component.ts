@@ -25,6 +25,7 @@ export class PreviewInterviewComponent implements OnInit, AfterViewInit {
   @Output('close') close: EventEmitter<any> = new EventEmitter<any>();
 
   currentIndex = 0;
+  showQuestions: boolean = false;  // Show question with the video is loaded
 
   constructor() {}
 
@@ -35,12 +36,13 @@ export class PreviewInterviewComponent implements OnInit, AfterViewInit {
 
     video.src = this.interview.video;
 
-    video.onloadedmetadata = function() {
+    video.oncanplay = ()=>{
       video.controls = true;
-    };
+      this.showQuestions = true;
+    }
 
     let questions = this.interview.questions;
-    video.ontimeupdate = ()=>{
+    video.addEventListener("timeupdate",()=>{
 
       for(let i = 0 ; i < questions.length - 1; i++){
         if(questions[i].time <= video.currentTime && questions[i + 1].time > video.currentTime){
@@ -54,7 +56,7 @@ export class PreviewInterviewComponent implements OnInit, AfterViewInit {
         this.currentIndex = last;
       }
 
-    }
+    })
 
   }
 
