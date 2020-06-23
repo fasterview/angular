@@ -43,6 +43,15 @@ export class OrgService {
     return this._http.get(environment.url("api/organization/" + this.org.id + "/submits"));
   }
 
+  /**
+   * Get the submits for specified interview
+   * 
+   * @param id string | number
+   */
+  getInterview(id: number | string){
+    return this._http.get(environment.url(`/api/interview/${id}/submits`));
+  }
+
 
   get(id: number|string){
     return this._http.get(environment.url("api/organization/" + id));

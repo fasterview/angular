@@ -34,7 +34,7 @@
                 <td>{{ s.user.name }}</td>
                 <td>{{ s.user.email }}</td>
                 <td class="text-violet font-bold"> 
-                  <a href="#">{{ s.interview.role }}</a>
+                  <a [routerLink]="['submits', s.interview.id]">{{ s.interview.role }}</a>
                 </td>
                 <td>{{ s.created_at }}</td>
                 <td> <span class="btn bg-green text-white">Pending</span></td>

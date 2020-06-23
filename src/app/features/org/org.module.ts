@@ -7,12 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { OrgService } from './services/org.service';
 import { ShowComponent } from './components/show/show.component';
 import { HomeComponent } from './components/home/home.component';
+import { ShowInterviewComponent } from './components/show-interview/show-interview.component';
 
 
 
 
 @NgModule({
-  declarations: [CreateComponent, ShowComponent, HomeComponent],
+  declarations: [CreateComponent, ShowComponent, HomeComponent, ShowInterviewComponent],
   imports: [
     SharedModule,
     ReactiveFormsModule,

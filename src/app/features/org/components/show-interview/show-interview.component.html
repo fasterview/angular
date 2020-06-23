@@ -1,0 +1,75 @@
+<div *ngIf="isLoading" class="text-center mt-30">
+    <div class="lds-dual-ring"></div>
+  </div>
+
+<div class="mt-30" *ngIf="!isLoading">
+  <div class="container-fluid">
+    <div class="col-12 dashboard-container">
+      <h2 class="text-center mt-30">
+        <a [routerLink]="['/org', org.id]">
+          {{ org.name }}
+        </a>
+      </h2>
+
+      <div class="interview-table">
+        <header class="d-flex justify-between align-center">
+          <h2>
+            Last submitted interviews for 
+            <span class="text-violet">{{ interview.role }}</span>
+          </h2>
+          <div class="search-form-container col-md-3 col-sm-4 col-12">
+            <!-- <form action="GET">
+                <input type="text" placeholder="Search"/>
+                <button><i class="fas fa-search"></i></button>
+              </form> -->
+          </div>
+        </header>
+        <section class="table-wrapper" *ngIf="submits.length; else noSubmits">
+          <table>
+            <thead>
+              <tr>
+                <td></td>
+                <td>Name</td>
+                <td>Email</td>
+                <td>Date</td>
+                <td>Status</td>
+                <td>Details</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let s of submits; let i = index">
+                <td>
+                  <img
+                    class="table-img"
+                    [src]="s.user.pic ? s.user.pic : '/assets/images/user.png'"
+                  />
+                </td>
+                <td>{{ s.user.name }}</td>
+                <td>{{ s.user.email }}</td>
+                <td>{{ s.created_at }}</td>
+                <td><span class="btn bg-green text-white">Pending</span></td>
+                <td>
+                  <button class="bg-blue" (click)="openPreview(i)">
+                    View
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        
+        <ng-template #noSubmits>
+            <h3 class="text-center">No submits for this interview yet!</h3>
+        </ng-template>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Interview preview-->
+<app-preview-interview
+  *ngIf="showPreview"
+  [interview]="interviewPreview"
+  (close)="closePreview()"
+></app-preview-interview>
