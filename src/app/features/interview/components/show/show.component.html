@@ -3,6 +3,9 @@
       <div class="col-12 dashboard-container">
         <h2>{{ interview.role }} <span class="font-light">At </span>{{ interview.org.name }}</h2>
         <h2>Interview Questions</h2>
+        <div class="col-md-4 col-sm-6 col-12 my-10" style="padding-left: 0px;">
+          <app-copy [text]="url"></app-copy>
+        </div>
         <section class="table-wrapper">
           <table>
             <thead>                                                  

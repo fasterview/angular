@@ -13,6 +13,7 @@ export class ShowComponent implements OnInit {
 
   interview: any = null;
   user: any = null;
+  url: string = "";
 
   constructor(private _inter: InterviewService, private _auth: AuthService) { }
 
@@ -24,6 +25,8 @@ export class ShowComponent implements OnInit {
     this._auth.user.subscribe( user => this.user = user);
     this.user = this._auth.getUser();
     
+    // Get full URL
+    this.url = window.location.href;
   }
 
 }

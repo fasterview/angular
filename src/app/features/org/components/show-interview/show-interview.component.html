@@ -15,7 +15,9 @@
         <header class="d-flex justify-between align-center">
           <h2>
             Last submitted interviews for 
-            <span class="text-violet">{{ interview.role }}</span>
+            <span class="text-violet">
+              <a [routerLink]="['/interview', interview.id]">{{ interview.role }}</a>
+            </span>
           </h2>
           <div class="search-form-container col-md-3 col-sm-4 col-12">
             <!-- <form action="GET">
