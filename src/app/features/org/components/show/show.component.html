@@ -30,7 +30,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let s of submits; let i = index;"> 
-                <td><img class="table-img" [src]="s.user.pic ? s.user.pic : '/assets/images/user.png'"/></td>
+                <td><img class="table-img" [src]="s.user.profile_pic ? s.user.profile_pic : '/assets/images/user.png'"/></td>
                 <td>{{ s.user.name }}</td>
                 <td>{{ s.user.email }}</td>
                 <td class="text-violet font-bold"> 

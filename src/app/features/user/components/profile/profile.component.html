@@ -5,7 +5,7 @@
         <div class="user-info">
           <img
             class="user-pic"
-            [src]="user.pic ? user.pic : '/assets/images/user.png'"
+            [src]="user.profile_pic ? user.profile_pic : '/assets/images/user.png'"
           />
           <span class="user-name">{{ user.name | titlecase }}</span>
           <p class="user-bio" *ngIf="user.bio">{{ user.bio }}</p>

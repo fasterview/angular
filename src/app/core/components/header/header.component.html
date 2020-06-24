@@ -19,7 +19,7 @@
             
         <ul class="navbar-list" *ngIf="user"><!--li.item-btn.dropdown-wrapper.show-dropdown -->
           <li class="item-btn dropdown-wrapper" [appClassOnClick]="'show-dropdown'">
-              <img src="{{ user.pic ? user.pic : '/assets/images/user.png' }}"/>
+              <img src="{{ user.profile_pic ? user.profile_pic : '/assets/images/user.png' }}"/>
               <span class="name">{{ user.name }}</span>
               <i class="fas fa-sort-down"></i>
             <ul class="list-item-dropdown dropdown-menu">

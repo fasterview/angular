@@ -25,6 +25,7 @@ export class ShowComponent implements OnInit {
     // Get latest submits for this org
     this._org.submits().subscribe((res: any) => {
       this.submits = res.data;
+      console.log(this.submits);
     });
   }
 
