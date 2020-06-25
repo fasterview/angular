@@ -72,6 +72,13 @@ export class AuthService {
   }
 
   /**
+   * Set user value
+   */
+  setUser(user){
+    this.storeUser(user);
+  }
+
+  /**
    * Return logged value
    */
   isLogged(): boolean {

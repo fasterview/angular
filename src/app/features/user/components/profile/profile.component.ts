@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UserService } from '../../user.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +17,16 @@ export class ProfileComponent implements OnInit {
   comps = [];
   loaded: boolean = false;
 
-  constructor(private _auth: AuthService, private _http: HttpClient) { }
+  // Edit user info
+  form: FormGroup;
+  editting: boolean = false;
+  userLoading: boolean = false;
+  @ViewChild("file", {static: true}) file: ElementRef;
+  @ViewChild("img", {static: true}) img: ElementRef;
+  fileError: string = ""; // Error message
+  newImage: File = null;
+
+  constructor(private _auth: AuthService, private _http: HttpClient, private _user: UserService) { }
 
   ngOnInit(): void {
     
@@ -23,8 +35,45 @@ export class ProfileComponent implements OnInit {
 
     // Fetch user company
     this.fetchCompany();
+
+    this.init();
   }
 
+
+  /**
+   * Initizl edit form
+   */
+  init(){
+    this.form = new FormGroup({
+      name: new FormControl(this.user.name, {validators: [Validators.required, Validators.minLength(3)]})
+    });
+
+    // Upload file input
+    this.file.nativeElement.addEventListener("change", (e: any) => {
+      // Start editting
+      this.edit();
+      
+      const fileInput = this.file.nativeElement;
+
+      if(fileInput.files.length == 0){
+        return; 
+      }
+
+      const file = fileInput.files[0];
+
+      if(file.type.split("/")[0] !== "image"){
+        this.fileError = "File must be an image";
+        return;
+      } else if(file.size / 1024 / 1024 > 4){
+        this.fileError = "The image can't be greater than 4MB";
+        return;
+      }
+
+      this.newImage = file;
+      this.img.nativeElement.src = URL.createObjectURL(file);
+    });
+
+  }
 
   /**
    * Fetch the companies that user works on
@@ -37,5 +86,43 @@ export class ProfileComponent implements OnInit {
         });
   }
 
+
+  /**
+   * Start editting user data
+   */ 
+  edit(){
+    this.editting = true;
+  }
+
+  /**
+   * Close the editting
+   */
+  close(){
+    this.editting = false;
+    this.newImage = null;
+    this.fileError = null;
+    this.img.nativeElement.src = this.user.profile_pic ? this.user.profile_pic : '/assets/images/user.png';
+  }
+
+  /**
+   * Submit edit user form
+   */
+  submit(){
+    const formData = new FormData();
+
+    formData.append("name", this.form.value.name);
+    if(this.newImage){
+      formData.append("image", this.newImage);
+    }
+
+    this.userLoading = true;
+    this._user.settings(formData)
+              .pipe(finalize(() => this.userLoading = false))
+              .subscribe((user)=>{
+                this._auth.setUser(user);
+                this.close(); // Close editting
+              });
+
+  }
 
 }

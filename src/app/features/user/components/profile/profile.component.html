@@ -2,14 +2,84 @@
   <div class="user-info-container bg-white">
     <div class="row">
       <div class="col-sm-8 col-lg-6 mx-auto">
-        <div class="user-info">
-          <img
-            class="user-pic"
-            [src]="user.profile_pic ? user.profile_pic : '/assets/images/user.png'"
-          />
-          <span class="user-name">{{ user.name | titlecase }}</span>
-          <p class="user-bio" *ngIf="user.bio">{{ user.bio }}</p>
-        </div>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+          <div class="user-info">
+            <div class="user-img-container">
+              <label for="file">
+                <img
+                class="user-pic"
+                [src]="user.profile_pic ? user.profile_pic : '/assets/images/user.png'"
+                #img
+                />
+                <div class="upload-title">
+                  Upload Image
+                </div>
+              </label>
+              <input type="file" name="file" id="file" #file>
+            </div>
+            <!-- Image error message -->
+            <span *ngIf="fileError" class="error-msg">{{ fileError }}</span>
+            <span class="user-name">
+              <span class="edit-box" (click)="edit()">
+                <span *ngIf="!editting">
+                  <span>
+                    {{ user.name | titlecase }}
+                  </span>
+                  <span class="edit-btn">
+                    <i class="fas fa-edit"></i>
+                  </span>
+                </span>
+              </span>
+
+                <!-- ============ Editting ============ -->
+                <span *ngIf="editting">
+                  <div class="form-group">
+                    <input 
+                          type="text" 
+                          name="name" 
+                          id="name" 
+                          formControlName="name" 
+                          autocomplete="off"
+                          [ngClass]="{
+                            invalid:
+                              form.get('name').invalid && form.get('name').touched
+                          }">
+                    <span *ngIf="form.get('name').touched">
+                      <small
+                        class="error-msg"
+                        *ngIf="form.get('name').errors?.required"
+                      >
+                        This field is required
+                      </small>
+                      <small
+                        class="error-msg"
+                        *ngIf="form.get('name').errors?.minlength"
+                      >
+                        The name can't be less than 3 characters long
+                      </small>
+                    </span>          
+                  </div>
+
+                  
+                  <div class="d-flex justify-between">
+                    <button 
+                          type="submit" 
+                          [disabled]="form.invalid || userLoading || (!form.dirty && !newImage)">
+
+                      <span *ngIf="!userLoading">Save</span>
+                      <div class="lds-dual-ring" *ngIf="userLoading"></div>
+                    </button>
+                    <button class="btn-dark" (click)="close()">Discard</button>
+                  </div>
+                </span>
+
+                
+
+
+            </span>
+            <p class="user-bio" *ngIf="user.bio">{{ user.bio }}</p>
+          </div>
+        </form>
       </div>
     </div>
   </div>
