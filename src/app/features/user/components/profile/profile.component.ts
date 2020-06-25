@@ -13,7 +13,7 @@ import { finalize } from 'rxjs/operators';
 })
 export class ProfileComponent implements OnInit {
 
-  user = null;
+  user: any = {name: "", profile_pic : ""};
   comps = [];
   loaded: boolean = false;
 
@@ -32,6 +32,7 @@ export class ProfileComponent implements OnInit {
     
     this._auth.user.subscribe(user => { this.user = user });
     this.user = this._auth.getUser();
+    this.user = this.user ? this.user : {name: "", profile_pic: ""};
 
     // Fetch user company
     this.fetchCompany();
