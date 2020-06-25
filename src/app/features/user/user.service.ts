@@ -18,4 +18,13 @@ export class UserService {
     return this._http.post(environment.url("/api/settings"), data);
   }
 
+
+  /**
+   * Change user password
+   * @param data any
+   */
+  changePassword(data: any){
+    return this._http.post(environment.url("/api/change-password"), data);
+  }
+
 }
