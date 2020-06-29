@@ -13,7 +13,6 @@ export class CopyComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.input);
     this.input.nativeElement.value = this.text;
   }
 

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { InterviewService } from '../../interview.service';
-import { ActivatedRoute } from '@angular/router';
-import { finalize } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
