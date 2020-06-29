@@ -21,6 +21,10 @@ export class ShowComponent implements OnInit {
 
     this.interview = this._inter.getInterview();
 
+    this._inter.interviewSubject.subscribe((interview)=>{
+      this.interview = interview;
+    });
+
     // Get user
     this._auth.user.subscribe( user => this.user = user);
     this.user = this._auth.getUser();

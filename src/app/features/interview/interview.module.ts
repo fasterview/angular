@@ -8,10 +8,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { SubmitComponent } from './components/submit/submit.component';
+import { EditComponent } from './components/edit/edit.component';
 
 
 @NgModule({
-  declarations: [ShowComponent, HomeComponent, SubmitComponent],
+  declarations: [ShowComponent, HomeComponent, SubmitComponent, EditComponent],
   imports: [
     SharedModule,
     InterviewRoutingModule,

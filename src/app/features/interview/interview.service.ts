@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import { environment } from 'src/environments/environment';
 export class InterviewService {
 
   interview: any = null;
+  interviewSubject: Subject<any> = new Subject<any>();
 
   constructor(private _http: HttpClient) { }
 
@@ -24,6 +26,7 @@ export class InterviewService {
    */
   setInterview(inter: any){
     this.interview = inter;
+    this.interviewSubject.next(this.interview);
   }
 
 
@@ -34,7 +37,24 @@ export class InterviewService {
     return this._http.get(environment.url("api/interview/" + id));
   }
 
+  update(id: string | number, data){
+    data._method= "PUT";
+    return this._http.post( environment.url("api/interview/" + id), data);
+  }
 
+  /**
+   * Fetch the interview again from the API
+   */
+  updated(){
+    this.get(this.interview.id)
+    .subscribe((res: any) => {
+      this.interview = res.interview;
+
+      // Add the interview to the service
+      this.setInterview(this.interview);
+    });
+  }
+  
   submit(data){
     return this._http.post(environment.url("api/interview/" + this.interview.id + "/submit"), data);
   }

@@ -25,7 +25,11 @@
         <section class="mt-20">
           
           <!-- Edit button -->
-          <button class="btn-dark" *ngIf="this.user.id == interview.org.user_id; else start">Edit</button>
+          <button   class="btn-dark" 
+                    *ngIf="this.user.id == interview.org.user_id; else start" 
+                    routerLink="edit"
+                    >Edit
+          </button>
           
           <!-- Start button -->
           <ng-template #start>

@@ -26,6 +26,7 @@ export class CreateComponent implements OnInit {
     // Intizlize the form
     this.createForm = new FormGroup({
       role: new FormControl("", {validators: [Validators.required, Validators.minLength(3), Validators.maxLength(50)]}),
+      require_cv: new FormControl(""),
       questions: new FormArray([], {validators: Validators.required}),
     });
 

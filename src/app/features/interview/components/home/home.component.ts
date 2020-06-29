@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InterviewService } from '../../interview.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { finalize } from 'rxjs/operators';
 
@@ -32,6 +32,10 @@ export class HomeComponent implements OnInit {
                 this._inter.setInterview(this.interview);
               });
     
+    this._inter.interviewSubject.subscribe((interview)=>{
+      this.interview = interview;
+    });
+
   }
 
 }
