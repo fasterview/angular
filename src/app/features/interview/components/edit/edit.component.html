@@ -124,13 +124,22 @@
           </div>
           
           <div class="col-12">
-            <div class="form-group col-12">
+            <div class="form-group col-12 btn-group">
               <button
                 class="btn btn-blue px-30"
                 type="submit"
                 [disabled]="updateForm.invalid || isLoading"
               >
                 Create
+              </button>
+              <!-- DELETE BUTTON -->
+              <button
+                type="button"
+                class="btn btn-red px-30"
+                [disabled]="isLoading"
+                (click)="delete()"
+              >
+                Delete
               </button>
             </div>
           </div>

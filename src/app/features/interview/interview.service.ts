@@ -54,7 +54,15 @@ export class InterviewService {
       this.setInterview(this.interview);
     });
   }
-  
+
+  /**
+   * Delete interview
+   */
+  delete(){
+    return this._http.delete(environment.url("/api/interview/" + this.interview.id));
+  }
+
+
   submit(data){
     return this._http.post(environment.url("api/interview/" + this.interview.id + "/submit"), data);
   }

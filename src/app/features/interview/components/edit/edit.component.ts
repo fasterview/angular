@@ -91,4 +91,22 @@ export class EditComponent implements OnInit {
                 })
   }
 
+  /**
+   * Delete the interview
+   */
+  delete(){
+    if(!confirm(`Are you sure you wnat to delete "${this.interview.role}" interview \nAll interviews will be deleted`)){
+      return;
+    }
+
+    this.isLoading = true;
+
+    this._inter.delete()
+                .pipe( finalize(()=> { this.isLoading = false; }) )
+                .subscribe(()=>{
+                  this._router.navigate(['/org', this.interview.org.id])
+                })
+
+  }
+
 }

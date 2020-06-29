@@ -4,7 +4,6 @@ import { HomeComponent } from './components/home/home.component';
 import { ShowComponent } from './components/show/show.component';
 import { SubmitComponent } from './components/submit/submit.component';
 import { EditComponent } from './components/edit/edit.component';
-import { IsOwnerGuard } from './guards/is-owner.guard';
 
 
 const routes: Routes = [
