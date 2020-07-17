@@ -13,6 +13,10 @@ import { AuthService } from './services/auth.service';
 import { AppRoutingModule } from '../app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { Error404Component } from './components/errors/error404/error404.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { TeamComponent } from './components/team/team.component';
+import { PolicyComponent } from './components/policy/policy.component';
 
 
 
@@ -25,6 +29,10 @@ import { Error404Component } from './components/errors/error404/error404.compone
     RegisterComponent,
     HomeComponent,
     Error404Component,
+    AboutComponent,
+    ContactComponent,
+    TeamComponent,
+    PolicyComponent,
   ],
   imports: [
     CommonModule,

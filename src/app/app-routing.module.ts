@@ -8,6 +8,10 @@ import { NotAuthGuard } from './core/guards/not-auth.guard';
 import { HomeComponent } from './core/components/home/home.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { Error404Component } from './core/components/errors/error404/error404.component';
+import { AboutComponent } from './core/components/about/about.component';
+import { ContactComponent } from './core/components/contact/contact.component';
+import { TeamComponent } from './core/components/team/team.component';
+import { PolicyComponent } from './core/components/policy/policy.component';
 
 
 
@@ -25,6 +29,10 @@ const routes: Routes = [
   },
   {path: "login", component: LoginComponent, canActivate: [NotAuthGuard]},
   {path: "register", component: RegisterComponent, canActivate: [NotAuthGuard]},
+  {path: "about", component: AboutComponent},
+  {path: "contact", component: ContactComponent},
+  {path: "team", component: TeamComponent},
+  {path: "policy", component: PolicyComponent},
   {path: "org", loadChildren: ()=> import("./features/org/org.module").then( m => m.OrgModule )},
   {path: "not-found", component: Error404Component},
   {path: "**", redirectTo: "not-found"},
