@@ -36,8 +36,6 @@ export class ProfileComponent implements OnInit {
 
     this._auth.user.subscribe(user => {
       this.user = user;
-      this.form.value.name = this.user.name;
-      this.form.value.bio = this.user.bio;
     })
 
     // Fetch user company
@@ -53,7 +51,7 @@ export class ProfileComponent implements OnInit {
   init(){
     this.form = new FormGroup({
       name: new FormControl(this.user.name, {validators: [Validators.required, Validators.minLength(3)]}),
-      bio: new FormControl(this.user.bio, {validators: [Validators.required, Validators.maxLength(500)]})
+      bio: new FormControl(this.user.bio, {validators: [Validators.maxLength(500)]})
     });
 
     // Upload file input
@@ -100,6 +98,10 @@ export class ProfileComponent implements OnInit {
    */ 
   edit(){
     this.editting = true;
+    this.form.setValue({
+      name: this.user.name,
+      bio: this.user.bio
+    });
   }
 
   /**

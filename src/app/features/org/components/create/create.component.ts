@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { OrgService } from '../../services/org.service';
 import { finalize } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create',
@@ -13,7 +14,7 @@ export class CreateComponent implements OnInit {
   createForm: FormGroup;
   isLoading: boolean = false;
 
-  constructor(private _org: OrgService) { }
+  constructor(private _org: OrgService, private _router: Router) { }
 
   ngOnInit(): void {
     this.createForm = new FormGroup({
@@ -31,7 +32,7 @@ export class CreateComponent implements OnInit {
     this._org.create(<{name: string}>this.createForm.value)
             .pipe(finalize(()=>{this.isLoading = false}))
             .subscribe((res)=>{
-                console.log(res);
+              this._router.navigate(['/profile']);
             })
   }
 
