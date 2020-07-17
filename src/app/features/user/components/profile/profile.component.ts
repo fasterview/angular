@@ -34,6 +34,12 @@ export class ProfileComponent implements OnInit {
     this.user = this._auth.getUser();
     this.user = this.user ? this.user : {name: "", profile_pic: ""};
 
+    this._auth.user.subscribe(user => {
+      this.user = user;
+      this.form.value.name = this.user.name;
+      this.form.value.bio = this.user.bio;
+    })
+
     // Fetch user company
     this.fetchCompany();
 
@@ -46,7 +52,8 @@ export class ProfileComponent implements OnInit {
    */
   init(){
     this.form = new FormGroup({
-      name: new FormControl(this.user.name, {validators: [Validators.required, Validators.minLength(3)]})
+      name: new FormControl(this.user.name, {validators: [Validators.required, Validators.minLength(3)]}),
+      bio: new FormControl(this.user.bio, {validators: [Validators.required, Validators.maxLength(500)]})
     });
 
     // Upload file input
@@ -112,6 +119,7 @@ export class ProfileComponent implements OnInit {
     const formData = new FormData();
 
     formData.append("name", this.form.value.name);
+    formData.append("bio", this.form.value.bio);
     if(this.newImage){
       formData.append("image", this.newImage);
     }

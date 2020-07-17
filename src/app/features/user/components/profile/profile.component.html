@@ -25,6 +25,7 @@
                   <span>
                     {{ user.name | titlecase }}
                   </span>
+                  <p class="user-bio" *ngIf="user.bio">{{ user.bio }}</p>
                   <span class="edit-btn">
                     <i class="fas fa-edit"></i>
                   </span>
@@ -33,6 +34,7 @@
 
                 <!-- ============ Editting ============ -->
                 <span *ngIf="editting">
+                  <!-- Name -->
                   <div class="form-group">
                     <input 
                           type="text" 
@@ -60,6 +62,27 @@
                     </span>          
                   </div>
 
+                  <!-- Bio -->
+                  <div class="form-group">
+
+                    <textarea name="bio" 
+                              placeholder="Your bio" 
+                              formControlName="bio"
+                              [ngClass]="{
+                                invalid:
+                                  form.get('bio').invalid && form.get('bio').touched
+                              }"
+                              rows="10"></textarea>
+                    <span *ngIf="form.get('bio').touched">
+                      <small
+                        class="error-msg"
+                        *ngIf="form.get('bio').errors?.maxlength"
+                      >
+                        The name can't be more than 500 characters long
+                      </small>
+                    </span>          
+                  </div>
+
                   
                   <div class="d-flex justify-between">
                     <button 
@@ -77,7 +100,6 @@
 
 
             </span>
-            <p class="user-bio" *ngIf="user.bio">{{ user.bio }}</p>
           </div>
         </form>
       </div>
