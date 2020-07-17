@@ -16,8 +16,9 @@ import {
 })
 export class PreviewInterviewComponent implements OnInit, AfterViewInit {
   @Input('interview') interview: {
-    video: string;
-    questions: { title: string; time: string | number }[];
+    video: string,
+    cv_file: string,
+    questions: { title: string; time: string | number }[]
   };
 
   @ViewChild('video') video: ElementRef;
@@ -34,6 +35,8 @@ export class PreviewInterviewComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     let video = this.video.nativeElement;
 
+    console.log(this.interview);
+    
     video.src = this.interview.video;
 
     video.oncanplay = ()=>{

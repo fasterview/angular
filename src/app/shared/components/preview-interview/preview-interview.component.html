@@ -20,6 +20,11 @@
     </div>
 
     <div class="lds-dual-ring" *ngIf="!showQuestions"></div>
+    <a 
+      *ngIf="interview.cv_file" 
+      [href]="interview.cv_file" 
+      target="_blank" 
+      class="btn btn-blue text-white cv-btn">Download CV</a>
 
   </div>
 </div>
