@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { AuthService } from './core/services/auth.service';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,8 @@ import { AuthService } from './core/services/auth.service';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
+    BrowserAnimationsModule, 
+    SimpleNotificationsModule.forRoot()
   ],
   providers: [
   ], 

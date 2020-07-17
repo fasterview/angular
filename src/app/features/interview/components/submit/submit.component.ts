@@ -3,6 +3,7 @@ import { InterviewService } from '../../interview.service';
 import { FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpEventType } from '@angular/common/http';
+import { NotifyService } from 'src/app/core/services/notify.service';
 
 declare var MediaRecorder : any;  // Media record is not known by TS
 
@@ -48,7 +49,9 @@ export class SubmitComponent implements OnInit {
   @ViewChild("progress") progress;
   // @ViewChild("preview") previewVideo;
 
-  constructor(private _inter: InterviewService, private _router: Router) { }
+  constructor(private _inter: InterviewService, 
+              private _router: Router, 
+              private _notify: NotifyService) { }
 
   ngOnInit(): void {
     // Get interview value
@@ -339,8 +342,8 @@ export class SubmitComponent implements OnInit {
                       return;
                     } else if (event.type == HttpEventType.Response) {
                       // Redirect the user to the profile page
-                      console.log(event);
-                      this._router.navigate(['/profile']);    
+                      this._notify.success("Congratulation 🤩", "The interview submitted successfully");
+                      this._router.navigate(['/profile']);
                     }
                   })
                 

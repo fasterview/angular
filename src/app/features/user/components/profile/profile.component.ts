@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../user.service';
 import { finalize } from 'rxjs/operators';
+import { NotifyService } from 'src/app/core/services/notify.service';
 
 @Component({
   selector: 'app-profile',
@@ -26,7 +27,10 @@ export class ProfileComponent implements OnInit {
   fileError: string = ""; // Error message
   newImage: File = null;
 
-  constructor(private _auth: AuthService, private _http: HttpClient, private _user: UserService) { }
+  constructor(private _auth: AuthService, 
+              private _http: HttpClient, 
+              private _user: UserService,
+              private _notify: NotifyService) { }
 
   ngOnInit(): void {
     
@@ -133,6 +137,7 @@ export class ProfileComponent implements OnInit {
               .subscribe((user)=>{
                 this._auth.setUser(user);
                 this.close(); // Close editting
+                this._notify.success("Congratulation 🤩", "Your information updated successfully");
               });
 
   }

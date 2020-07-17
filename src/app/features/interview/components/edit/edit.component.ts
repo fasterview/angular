@@ -4,6 +4,7 @@ import { InterviewService } from '../../interview.service';
 import { FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { NotifyService } from 'src/app/core/services/notify.service';
 
 @Component({
   selector: 'app-edit',
@@ -18,7 +19,10 @@ export class EditComponent implements OnInit {
   isLoading: boolean = false;
 
 
-  constructor(private _inter: InterviewService, private _router: Router, private _auth: AuthService) { }
+  constructor(private _inter: InterviewService, 
+              private _router: Router, 
+              private _auth: AuthService,
+              private _notify: NotifyService) { }
 
   ngOnInit(): void {
     // Check if the current user is the owner
@@ -87,6 +91,7 @@ export class EditComponent implements OnInit {
                 .pipe(finalize(()=>{ this.isLoading = false; }))
                 .subscribe((res: any)=>{
                   // Redirect the uesr to vew interview page
+                  this._notify.success("Congratulation 🤩", "The interview updated successfully");
                   this._router.navigate(['/interview/' + res.interview.id]);
                   this._inter.updated();
                 })

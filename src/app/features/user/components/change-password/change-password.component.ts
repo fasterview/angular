@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../user.service';
 import { finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { NotifyService } from 'src/app/core/services/notify.service';
 
 @Component({
   selector: 'app-change-password',
@@ -15,7 +16,7 @@ export class ChangePasswordComponent implements OnInit {
   loading: boolean = false;
   oldSentPassword: string = "€"; // That a letter that user can't type
 
-  constructor(private _user: UserService, private _router: Router) { }
+  constructor(private _user: UserService, private _router: Router, private _notify: NotifyService) { }
 
   ngOnInit(): void {
 
@@ -40,6 +41,7 @@ export class ChangePasswordComponent implements OnInit {
               .subscribe(
                 (res) => {
                     this._router.navigate(["/profile"]);
+                    this._notify.success("Congratulation 🤩", "Password changed successfully");
                 }, 
                 (err: any) => {
                   console.log(err);

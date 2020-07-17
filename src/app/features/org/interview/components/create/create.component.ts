@@ -4,6 +4,8 @@ import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { InterviewService } from '../../interview.service';
 import { finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
+import { NotifyService } from 'src/app/core/services/notify.service';
 
 @Component({
   selector: 'app-create',
@@ -16,7 +18,10 @@ export class CreateComponent implements OnInit {
   createForm: FormGroup;
   isLoading: boolean = false;
 
-  constructor(private _org: OrgService, private _inter: InterviewService, private _router: Router) { }
+  constructor(private _org: OrgService, 
+              private _inter: InterviewService, 
+              private _router: Router, 
+              private _notify: NotifyService) { }
 
   ngOnInit(): void {
     
@@ -72,6 +77,7 @@ export class CreateComponent implements OnInit {
                 .pipe(finalize(()=>{ this.isLoading = false; }))
                 .subscribe((res: any)=>{
                   // Redirect the uesr to vew interview page
+                  this._notify.success("Congratulation 🤩", "The interview created successfully");
                   this._router.navigate(['/interview/' + res.interview.id]);
                 })
   }
