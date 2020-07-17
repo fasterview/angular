@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { InterviewService } from '../../interview.service';
 import { FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpEventType } from '@angular/common/http';
 
 declare var MediaRecorder : any;  // Media record is not known by TS
 
@@ -27,6 +28,12 @@ export class SubmitComponent implements OnInit {
   nextTimeout: any = null;  // Move to next question timeout
   showPreview: boolean = false; // Show and hide preview
 
+  fileName: string = "";  // CV file name
+  fileError: string = "";  // Wrong file format
+  @ViewChild("cv", {static: true}) cv: ElementRef;
+  cvFile: File = null;
+
+  uploaded: number = 0; // Uploaded value
 
   form: FormGroup;
 
@@ -60,6 +67,31 @@ export class SubmitComponent implements OnInit {
       "questions": new FormArray([], {validators: [Validators.required]}),
       video: new FormControl("")
     });
+
+    // Upload file
+    if(this.interview.require_cv){
+      this.cv.nativeElement.addEventListener("change", ()=>{
+        if(this.cv.nativeElement.files.length){
+          
+          let file = this.cv.nativeElement.files[0];
+          let split = file.name.split(".");
+          console.log(this.cv.nativeElement.files);
+          console.log(split[split.length - 1]);
+          if(split.length > 0 && split[split.length - 1] == "pdf"){
+            // Validate
+            this.fileName = file.name;
+            this.cvFile = file;
+            this.fileError = "";
+          } else {
+            this.fileName = "";
+            this.cvFile = null;
+            this.fileError =  "Wrong file format, Only pdf files are allowed";
+          }
+          
+        }
+      });
+    }
+    
   }
 
   /**
@@ -200,7 +232,7 @@ export class SubmitComponent implements OnInit {
     this.allowNext = false;
     setTimeout(()=>{
       this.allowNext = true;
-    }, 5 * 1000); 
+    }, 1 * 1000); 
 
     this.switchClass();
 
@@ -293,12 +325,25 @@ export class SubmitComponent implements OnInit {
 
       // File
       fd.append("video", this.blob, "video.mp4");
+      if(this.interview.require_cv){
+        fd.append("cv", this.cvFile);
+      }
       console.log(this.blob.type);
 
       this._inter.submit(fd)
-                .subscribe((res)=>{
-                  console.log(res);
-                })
+                .subscribe(
+                  (event: any) => {
+                    // Upload progress
+                    if (event.type == HttpEventType.UploadProgress) {
+                      this.uploaded = parseInt(((event.loaded / event.total) * 100).toString());
+                      return;
+                    } else if (event.type == HttpEventType.Response) {
+                      // Redirect the user to the profile page
+                      console.log(event);
+                      this._router.navigate(['/profile']);    
+                    }
+                  })
+                
     }
 
 

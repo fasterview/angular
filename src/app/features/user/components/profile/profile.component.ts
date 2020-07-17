@@ -90,6 +90,7 @@ export class ProfileComponent implements OnInit {
           this.comps = res.organizations
           this.loaded = true;
         });
+        
   }
 
 
