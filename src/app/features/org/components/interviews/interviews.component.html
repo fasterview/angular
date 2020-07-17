@@ -1,0 +1,33 @@
+<div *ngIf="isLoading" class="text-center mt-30">
+  <div class="lds-dual-ring"></div>
+</div>
+<section class="team-section" *ngIf="!isLoading">
+  <div class="container">
+      <h1 class="underline-heading">
+        <a [routerLink]="['/org', org.id]">
+          {{ org.name }}
+        </a>
+      </h1>
+    </div>
+    <div class="container">
+      <div class="row">
+        
+        <div class="col-lg-4 col-sm-6 col-12 my-10" *ngFor="let inter of interviews; let i = index;">
+          <div class="person-box">
+            <div class="person-body">
+              <h6 class="person-name text-blue" style="font-weight: bolder;text-align: left;">
+                 {{ inter.role }}
+              </h6>
+              <p>{{ inter.description }}</p>
+              <small class="p-10 bg-dark text-white" *ngIf="inter.require_cv">Require CV</small>
+              <div class="mt-30">
+                <a [routerLink]="['/interview', inter.id]" class="btn btn-blue text-white">View</a>
+              </div>
+            </div>
+          </div>
+        </div>
+   
+        
+      </div>
+    </div>
+  </section>

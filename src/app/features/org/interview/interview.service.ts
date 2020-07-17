@@ -12,4 +12,8 @@ export class InterviewService {
   create(id: number, body: any){
     return this._http.post(environment.url("/api/" + id + "/interview"), body);
   }
+
+  getAll(id: number){
+    return this._http.get(environment.url("api/organization/"+ id +"/interviews"));
+  }
 }

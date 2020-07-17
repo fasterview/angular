@@ -8,12 +8,13 @@ import { OrgService } from './services/org.service';
 import { ShowComponent } from './components/show/show.component';
 import { HomeComponent } from './components/home/home.component';
 import { ShowInterviewComponent } from './components/show-interview/show-interview.component';
+import { InterviewsComponent } from './components/interviews/interviews.component';
 
 
 
 
 @NgModule({
-  declarations: [CreateComponent, ShowComponent, HomeComponent, ShowInterviewComponent],
+  declarations: [CreateComponent, ShowComponent, HomeComponent, ShowInterviewComponent, InterviewsComponent],
   imports: [
     SharedModule,
     ReactiveFormsModule,
