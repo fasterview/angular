@@ -1,0 +1,33 @@
+
+<td><img class="table-img" [src]="s.user.profile_pic ? s.user.profile_pic : '/assets/images/user.png'"/></td>
+<td>{{ s.user.name }}</td>
+<td>{{ s.user.email }}</td>
+<td class="text-violet font-bold"> 
+    <a [routerLink]="['submits', s.interview.id]">{{ s.interview.role }}</a>
+</td>
+<td>{{ s.created_at }}</td>
+<td> 
+    <button 
+        class="btn text-white btn-menu"
+        [ngClass]="{
+            'bg-blue': s.status == 'pending',
+            'bg-red': s.status == 'rejected',
+            'bg-green': s.status == 'accepted'
+        }"
+        [disabled]="isLoading"
+        >
+        <span appClassOnClick="show-menu">
+            {{ s.status | titlecase }}
+            <span *ngIf="isLoading">...</span>
+        </span>
+        <div class="btn-menu-container">
+            <ul>
+                <li (click)="accept()"><span *ngIf="s.status != 'accepted'">Accept</span></li>
+                <li (click)="reject()"><span *ngIf="s.status != 'rejected'">Reject</span></li>
+            </ul>
+        </div>
+    </button>
+</td>
+<td> 
+    <button class="bg-blue" (click)="show()">View</button>
+</td>

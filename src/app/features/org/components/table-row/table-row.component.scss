@@ -1,0 +1,46 @@
+:host{
+    display: table-row;
+}
+
+.btn-menu{
+    position: relative;
+    display: block;
+    z-index: 3;
+    cursor: pointer;
+    .btn-menu-container{
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0px;
+        min-width: calc(100% + 20px);
+        color: #333;
+        ul{
+            list-style: none;
+            padding: 0px;
+            margin: 0px;
+            text-align: left;
+            border: 1px solid #D8D8D8;
+            border-radius: 2px;
+            overflow: hidden;
+            li{
+                font-size: 16px;
+                padding: 10px 10px 0px 10px;
+                background-color: white;
+                cursor: pointer;
+                &:not(:last-child) span,
+                &:not(:last-child) a{
+                    border-bottom: 1px solid #D8D8D8;
+                    background-color: transparent;
+                }
+                &:hover{
+                    background-color: #e0e8f7;
+                }
+            }
+        }
+    }
+
+    .show-menu + .btn-menu-container{
+        display: block;
+    }
+
+}

@@ -148,7 +148,7 @@
         </div>
         
         <div class="col-12">
-          <div class="form-group col-12">
+          <div class="form-group col-12" style="display: flex; justify-content: space-between;">
             <button
               class="btn btn-blue px-30"
               type="submit"
@@ -156,6 +156,7 @@
             >
               Create
             </button>
+            <a [routerLink]="['/org', org.id]" class="btn bg-red text-white">Cancel</a>
           </div>
         </div>
       </div>

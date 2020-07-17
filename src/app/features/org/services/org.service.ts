@@ -56,4 +56,26 @@ export class OrgService {
   get(id: number|string){
     return this._http.get(environment.url("api/organization/" + id));
   }
+
+  /**
+   * Add uesr to an organization
+   */
+  accept(user_id: number|string, interviewID){
+    console.log(interviewID);
+    return this._http.post(environment.url("/api/organization/" + this.org.id + "/user/" + interviewID), {
+      user_id,
+      status: "accepted"
+    });
+  }
+  
+  /**
+   * Remove user from organization
+   */
+  reject(user_id: number|string, interviewID){
+    return this._http.post(environment.url("/api/organization/" + this.org.id + "/user/" + interviewID), {
+      user_id,
+      status: "rejected"
+    });
+  }
+
 }

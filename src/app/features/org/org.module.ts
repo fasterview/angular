@@ -9,12 +9,13 @@ import { ShowComponent } from './components/show/show.component';
 import { HomeComponent } from './components/home/home.component';
 import { ShowInterviewComponent } from './components/show-interview/show-interview.component';
 import { InterviewsComponent } from './components/interviews/interviews.component';
+import { TableRowComponent } from './components/table-row/table-row.component';
 
 
 
 
 @NgModule({
-  declarations: [CreateComponent, ShowComponent, HomeComponent, ShowInterviewComponent, InterviewsComponent],
+  declarations: [CreateComponent, ShowComponent, HomeComponent, ShowInterviewComponent, InterviewsComponent, TableRowComponent],
   imports: [
     SharedModule,
     ReactiveFormsModule,

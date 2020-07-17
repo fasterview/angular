@@ -30,19 +30,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let s of submits; let i = index;"> 
-                <td><img class="table-img" [src]="s.user.profile_pic ? s.user.profile_pic : '/assets/images/user.png'"/></td>
-                <td>{{ s.user.name }}</td>
-                <td>{{ s.user.email }}</td>
-                <td class="text-violet font-bold"> 
-                  <a [routerLink]="['submits', s.interview.id]">{{ s.interview.role }}</a>
-                </td>
-                <td>{{ s.created_at }}</td>
-                <td> <span class="btn bg-green text-white">Pending</span></td>
-                <td> 
-                  <button class="bg-blue" (click)="showInterview(i)">View</button>
-                </td>
-              </tr>
+                <app-table-row *ngFor="let s of submits; let i = index;" [s]="s" (showInterview)="showInterview(i)"></app-table-row>
             </tbody>
           </table>
         </section>
