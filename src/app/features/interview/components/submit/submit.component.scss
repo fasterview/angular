@@ -1,13 +1,13 @@
 .interview-container{
-    height: 100vh;
-    min-height: 300px;
-    max-height: 700px;
+    height: calc(100vh - 60px);
+    min-height: 500px;
     background-color: #588df8;
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+    margin-bottom: -100px;
 }
 
 .text-container{
@@ -68,12 +68,12 @@
 }
 
 .progress{
-    height: 10px;
+    height: 15px;
     background-color: red;
     width: 10%;
     transition: none;
     position: absolute;
-    top: 0px;
+    top: 5px;
     left: 0px;
     transition-delay: 0s;
     transition-property: width;

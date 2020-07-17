@@ -50,7 +50,7 @@
 
     <!-- This div contains submit, back and preview -->
     <div class="text-container" *ngIf="recorded">
-        <div class="btn-group" style="margin-bottom: 20px" >
+        <div class="btn-group" style="margin-bottom: 20px" *ngIf="interview.require_cv">
             <label for="uploadCV" class="btn btn-light text-dark">
                 Upload CV
             </label>
