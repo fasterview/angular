@@ -3,6 +3,10 @@
       <div class="col-12 dashboard-container">
         <h2>{{ interview.role }} <span class="font-light">At </span>{{ interview.org.name }}</h2>
         <h2>Interview Questions</h2>
+        <h3 *ngIf="interview.description">
+          <strong class="text-blue">Note:</strong>
+          {{ interview.description }}
+        </h3>
         <div class="col-md-4 col-sm-6 col-12 my-10" style="padding-left: 0px;">
           <app-copy [text]="url"></app-copy>
         </div>
@@ -23,7 +27,9 @@
           </table>
         </section>
         <section class="mt-20">
-          
+          <h2 *ngIf="interview.require_cv">
+              Require CV in PDF format
+          </h2>
           <!-- Edit button -->
           <button   class="btn-dark" 
                     *ngIf="this.user.id == interview.org.user_id; else start" 

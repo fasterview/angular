@@ -48,6 +48,34 @@
                 </span>
               </div>
             </div>
+
+
+            <div class="col-12 form-group">
+              <div class="form-group">
+                <label>Description <small style="opacity: .5;">(Optional)</small></label>
+                <textarea
+                  rows="5"
+                  formControlName="description"
+                  [class.invalid]="
+                    updateForm.get('description').invalid &&
+                    updateForm.get('description').touched
+                  "></textarea>
+                <span
+                  class="error-msg"
+                  *ngIf="
+                    updateForm.get('description').invalid &&
+                    updateForm.get('description').touched
+                  "
+                >
+                  <small *ngIf="updateForm.get('description').errors.minlength">
+                    Position can't be less than 20 characters long
+                  </small>
+                  <small *ngIf="updateForm.get('description').errors.maxlength">
+                    Position can't be more than 400 characters long
+                  </small>
+                </span>
+              </div>
+            </div>
             
             <div class="col-12">
               <div class="form-group">
@@ -130,7 +158,7 @@
                 type="submit"
                 [disabled]="updateForm.invalid || isLoading"
               >
-                Create
+                Save
               </button>
               <!-- DELETE BUTTON -->
               <button
