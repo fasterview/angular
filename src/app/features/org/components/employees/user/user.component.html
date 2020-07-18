@@ -13,5 +13,12 @@
     <h4 class="text-center text-blue" style="margin: 0px;">
       {{ user.pivot.role | titlecase }}
     </h4>
+    <p>{{ user.bio }}</p>
+    <div>
+      <button class="btn btn-red" *ngIf="org.is_owner" [disabled]="isLoading" (click)="reject()">
+        Remove
+        <span *ngIf="isLoading">...</span>
+      </button>
+    </div>
   </div>
 </div>

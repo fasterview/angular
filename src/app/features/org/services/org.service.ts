@@ -78,7 +78,15 @@ export class OrgService {
       status: "rejected"
     });
   }
-
+  
+  /**
+   * Remove user from organization
+   */
+  rejectOrg(user_id: number|string){
+    return this._http.post(environment.url("/api/organization/" + this.org.id + "/reject/user"), {
+      user_id: user_id
+    });
+  }
 
   /**
    * Get all employees

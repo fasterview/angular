@@ -19,9 +19,16 @@
                  {{ inter.role }}
               </h6>
               <p>{{ inter.description }}</p>
-              <small class="p-10 bg-dark text-white" *ngIf="inter.require_cv">Require CV</small>
-              <div class="mt-30">
+              <div>
+                <small class="p-10 bg-dark text-white" *ngIf="inter.require_cv">Require CV</small>
+              </div>
+              <div>
+                <small class="p-10 bg-green text-white" *ngIf="inter.active">Active</small>
+                <small class="p-10 bg-active text-white" *ngIf="!inter.active">Diabled</small>
+              </div>
+              <div class="mt-30" style="display: flex; justify-content: space-between;">
                 <a [routerLink]="['/interview', inter.id]" class="btn btn-blue text-white">View</a>
+                <a [routerLink]="['/org', org.id, '/submits', inter.id]" class="btn btn-dark text-white">Submits</a>
               </div>
             </div>
           </div>

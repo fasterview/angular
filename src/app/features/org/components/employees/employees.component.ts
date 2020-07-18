@@ -19,6 +19,12 @@ export class EmployeesComponent implements OnInit {
 
     this.org = this._org.org;
     
+    this.load();
+
+
+  }
+
+  load(){
     this.isLoading = true;
     this._org.employees()
               .pipe(finalize(()=>{this.isLoading = false;}))
@@ -26,8 +32,10 @@ export class EmployeesComponent implements OnInit {
                 this.users = res;
                 console.log(res);
               });
+  }
 
-
+  refresh(){
+    this.load();
   }
 
 }
