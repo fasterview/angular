@@ -127,9 +127,15 @@
             <a [routerLink]="'/org/' + c.id">
               <div class="interview-card">
                 <h3>{{ c.name }}</h3>
-                <h4 class="text-violet my-0" *ngIf="c.is_owner">
+                <h4 class="text-violet my-0" *ngIf="c.is_owner; else role">
                   Owner <i class="fas fa-crown"></i>
                 </h4>
+                <ng-template #role>
+                  <h4 class="text-violet my-0">
+                    {{ c.pivot.role }}
+                  </h4>
+
+                </ng-template>
               </div>
             </a>
           </div>

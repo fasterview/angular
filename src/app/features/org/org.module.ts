@@ -10,12 +10,14 @@ import { HomeComponent } from './components/home/home.component';
 import { ShowInterviewComponent } from './components/show-interview/show-interview.component';
 import { InterviewsComponent } from './components/interviews/interviews.component';
 import { TableRowComponent } from './components/table-row/table-row.component';
+import { EmployeesComponent } from './components/employees/employees.component';
+import { UserComponent } from './components/employees/user/user.component';
 
 
 
 
 @NgModule({
-  declarations: [CreateComponent, ShowComponent, HomeComponent, ShowInterviewComponent, InterviewsComponent, TableRowComponent],
+  declarations: [CreateComponent, ShowComponent, HomeComponent, ShowInterviewComponent, InterviewsComponent, TableRowComponent, EmployeesComponent, UserComponent],
   imports: [
     SharedModule,
     ReactiveFormsModule,

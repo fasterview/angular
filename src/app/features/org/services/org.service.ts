@@ -78,4 +78,12 @@ export class OrgService {
     });
   }
 
+
+  /**
+   * Get all employees
+   */
+  employees(){
+    return this._http.get(environment.url("api/organization/"+ this.org.id +"/users"));
+  }
+
 }

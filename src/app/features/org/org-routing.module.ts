@@ -5,6 +5,7 @@ import { ShowComponent } from './components/show/show.component';
 import { HomeComponent } from './components/home/home.component';
 import { ShowInterviewComponent } from './components/show-interview/show-interview.component';
 import { InterviewsComponent } from './components/interviews/interviews.component';
+import { EmployeesComponent } from './components/employees/employees.component';
 
 
 
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: ":id", component: HomeComponent, children: [
     {path: "", component: ShowComponent},
     {path: "interviews", component: InterviewsComponent},
+    {path: "employees", component: EmployeesComponent},
     {path: "submits/:interview", component: ShowInterviewComponent},
     {path: "interview", loadChildren: () => import("./interview/interview.module").then( m => m.InterviewModule )},
   ]},

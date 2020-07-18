@@ -2,9 +2,14 @@
   <div class="container-fluid">
     <div class="col-12 dashboard-container">
       <h2 class="text-center mt-30">{{ org.name }}</h2>
-      <div class="col-12 text-right">
+      <div class="col-12" style="display: flex; justify-content: space-between;">
+        <div>
+          <a class="btn-sm btn-blue text-light" routerLink="employees" style="margin-right: 15px;">Employees</a>
+        </div>
+        <div>
           <a class="btn-sm btn-blue text-light" routerLink="interviews" style="margin-right: 15px;">All Interviews</a>
           <a class="btn-sm btn-dark text-light" routerLink="interview/create">Create New Interview</a>
+        </div>
       </div>
       <div class="interview-table">
         <header class="d-flex justify-between align-center">
