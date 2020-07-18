@@ -12,6 +12,7 @@ export class ShowComponent implements OnInit {
   interview: any = null;
   user: any = null;
   url: string = "";
+  hide: boolean = false;
 
   constructor(private _inter: InterviewService, private _auth: AuthService) { }
 
@@ -21,7 +22,17 @@ export class ShowComponent implements OnInit {
 
     this._inter.interviewSubject.subscribe((interview)=>{
       this.interview = interview;
+      
+      console.log(this.interview.org.user_id, this._auth.getUser().id);
+      if(this.interview.org.user_id != this._auth.getUser().id && !this.interview.active){
+        this.hide = true;
+      }
     });
+
+    console.log(this.interview.org.user_id, this._auth.getUser().id);
+      if(this.interview.org.user_id != this._auth.getUser().id && !this.interview.active){
+        this.hide = true;
+      }
 
     // Get user
     this._auth.user.subscribe( user => this.user = user);

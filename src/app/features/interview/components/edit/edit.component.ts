@@ -46,6 +46,7 @@ export class EditComponent implements OnInit {
       role: new FormControl(this.interview.role, {validators: [Validators.required, Validators.minLength(3), Validators.maxLength(50)]}),
       description: new FormControl(this.interview.description, {validators: [Validators.minLength(20), Validators.maxLength(400)]}),
       require_cv: new FormControl(this.interview.require_cv ? "require" : ""),
+      active: new FormControl(this.interview.active ? "active" : ""),
       questions: new FormArray([], {validators: Validators.required}),
     });
 
