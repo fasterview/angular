@@ -26,7 +26,7 @@
               </form> -->
           </div>
         </header>
-        <section class="table-wrapper" *ngIf="submits.length; else noSubmits">
+        <section class="table-wrapper" *ngIf="submits.length; else noSubmits" style="padding-bottom: 50px;">
           <table>
             <thead>
               <tr>
@@ -39,23 +39,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let s of submits; let i = index">
-                <td>
-                  <img
-                    class="table-img"
-                    [src]="s.user.profile_pic ? s.user.profile_pic : '/assets/images/user.png'"
-                  />
-                </td>
-                <td>{{ s.user.name }}</td>
-                <td>{{ s.user.email }}</td>
-                <td>{{ s.created_at }}</td>
-                <td><span class="btn bg-green text-white">Pending</span></td>
-                <td>
-                  <button class="bg-blue" (click)="openPreview(i)">
-                    View
-                  </button>
-                </td>
-              </tr>
+                <app-table-row 
+                      *ngFor="let s of submits; let i = index;" 
+                      [s]="s" 
+                      (showInterview)="openPreview(i)" 
+                      [hideRole]="true"></app-table-row>
             </tbody>
           </table>
         </section>

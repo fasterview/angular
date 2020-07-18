@@ -2,7 +2,7 @@
 <td><img class="table-img" [src]="s.user.profile_pic ? s.user.profile_pic : '/assets/images/user.png'"/></td>
 <td>{{ s.user.name }}</td>
 <td>{{ s.user.email }}</td>
-<td class="text-violet font-bold"> 
+<td class="text-violet font-bold" *ngIf="!hideRole"> 
     <a [routerLink]="['submits', s.interview.id]">{{ s.interview.role }}</a>
 </td>
 <td>{{ s.created_at }}</td>

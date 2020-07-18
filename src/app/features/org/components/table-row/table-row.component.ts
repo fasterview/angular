@@ -13,6 +13,7 @@ export class TableRowComponent implements OnInit {
   isLoading: boolean = false;
 
   @Input("s") s: any;
+  @Input("hideRole") hideRole: boolean = false;
   @Output("showInterview") showInterview: EventEmitter<any> = new EventEmitter<any>();
   constructor(private _org: OrgService, private _notify: NotifyService) { }
 

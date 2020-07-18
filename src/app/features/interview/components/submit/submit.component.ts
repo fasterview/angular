@@ -194,6 +194,10 @@ export class SubmitComponent implements OnInit {
 
     this.createInput(0);
 
+    if(this.currentIndex == this.interview.questions.length - 1){
+      // Finish button
+      this.lastQuestion = true;
+    }
   }
 
 
