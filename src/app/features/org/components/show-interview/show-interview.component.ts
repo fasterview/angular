@@ -24,6 +24,10 @@ export class ShowInterviewComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if(this._org.toEmployees()){
+      return;
+    }
+
     this.interviewId = this._route.snapshot.params.interview;
 
     

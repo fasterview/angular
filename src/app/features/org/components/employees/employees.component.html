@@ -5,13 +5,21 @@
 <div class="mt-30" *ngIf="!isLoading">
   <div class="container-fluid">
     <h1 class="underline-heading">
-        <a [routerLink]="['/org', org.id]">
+
+        <a [routerLink]="['/org', org.id]" *ngIf="org.is_owner; else notOwner">
           {{ org.name }}
         </a>
+        <ng-template #notOwner>
+          {{ org.name }}
+        </ng-template>
+        
+
       </h1>
     <div class="col-12 dashboard-container">
         <div class="row">
-            <app-user *ngFor="let user of users; let i = index;" [user]="user" [index]="i"></app-user>
+          <div class="col-lg-3 col-md-4 col-sm-6 col-12" *ngFor="let user of users; let i = index;">
+            <app-user  [user]="user" [index]="i"></app-user>
+          </div>
         </div>
     </div>
   </div>

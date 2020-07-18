@@ -18,7 +18,12 @@ export class InterviewsComponent implements OnInit {
 
   ngOnInit(): void {
 
+    
     this.org = this._org.org;
+
+    if(this._org.toEmployees()){
+      return;
+    }  
 
     this.isLoading = true;
     console.log("ID:", this._org.org.id);

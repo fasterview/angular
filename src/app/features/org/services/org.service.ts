@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from "@angular/common/http";
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ export class OrgService {
 
   org: any = null;  // Organiztion
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient, private _router: Router) { }
 
   /**
    * Set org value
@@ -84,6 +85,13 @@ export class OrgService {
    */
   employees(){
     return this._http.get(environment.url("api/organization/"+ this.org.id +"/users"));
+  }
+
+  toEmployees(){
+    if(!this.org.is_owner){
+      this._router.navigate(['/org', this.org.id, 'employees']);
+      return true;
+    }
   }
 
 }

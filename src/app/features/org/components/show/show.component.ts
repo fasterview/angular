@@ -19,6 +19,10 @@ export class ShowComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if(this._org.toEmployees()){
+      return;
+    }  
+
     // Get organization id
     this.org = this._org.getOrg();
 

@@ -23,7 +23,7 @@ export class EmployeesComponent implements OnInit {
     this._org.employees()
               .pipe(finalize(()=>{this.isLoading = false;}))
               .subscribe((res: any)=>{
-                this.users = res.data;
+                this.users = res;
                 console.log(res);
               });
 

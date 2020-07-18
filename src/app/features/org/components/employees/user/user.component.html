@@ -1,16 +1,17 @@
-<div class="col-lg-3 col-md-4 col-sm-6 col-12">
-    <div class="person-box">
-        <div class="person-body">
-        <img class="user-pic" [src]="user.profile_pic ? user.profile_pic : '/assets/images/user.png'"/>
-            <h4 class="person-name">
-                {{ user.name | titlecase }}
-            </h4>
-            <h5 class="text-center text-dark" style="margin: 0px;">
-                {{ user.email }}
-            </h5>
-            <h4 class="text-center text-blue" style="margin: 0px;">
-                {{ user.pivot.role | titlecase }}
-            </h4>
-        </div>
-      </div>
+<div class="person-box">
+  <div class="person-body">
+    <img
+      class="user-pic"
+      [src]="user.profile_pic ? user.profile_pic : '/assets/images/user.png'"
+    />
+    <h4 class="person-name">
+      {{ user.name | titlecase }}
+    </h4>
+    <h5 class="text-center text-dark" style="margin: 0px;">
+      {{ user.email }}
+    </h5>
+    <h4 class="text-center text-blue" style="margin: 0px;">
+      {{ user.pivot.role | titlecase }}
+    </h4>
+  </div>
 </div>
